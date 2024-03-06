@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isEmpty === false">
     <div class="row">
       <section class="booksSection">
         <div
@@ -26,7 +26,7 @@
                   type="button"
                   id="readingList"
                   class="btn"
-                  (click)="addBookToReadingList(book._id)"
+                  (click)="deleteBook(book._id)"
                 >
                   Delete from ReadingList
                 </button>
@@ -35,4 +35,9 @@
         </div>
       </section>
     </div>
+  </div>
+
+
+  <div class="container">
+    <p>Please add book to readingList to display</p>
   </div>

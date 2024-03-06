@@ -79,13 +79,15 @@
   background-color: #0066cc;
   border-radius: 20px;
 }
+.readingList {
+  gap: 5%;
+}
 #readingList {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: #ffffff;
   background-color: #0066cc;
   border-radius: 20px;
-  margin-left: 18%;
 }
 
 /* media queries to make the ui responsive */

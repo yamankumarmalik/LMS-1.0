@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 //router to navigate to other components
 import { Router } from '@angular/router';
 //login Service
@@ -9,7 +9,7 @@ import { LoginService } from '../services/login.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   //inject the login Service
   loginService = inject(LoginService);
 
@@ -17,15 +17,17 @@ export class HeaderComponent {
   loginStatus;
 
   //can also initialize services in constructor
-  constructor(private router: Router) {
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
     this.loginStatus = this.loginService.userAdmin;
   }
 
   // to change login status using signal when we click on logOut
   changeLoginStatus() {
-    if(this.loginService.userAdmin() === 'admin'){
+    if (this.loginService.userAdmin() === 'admin') {
       localStorage.removeItem('adminToken');
-    }else{
+    } else {
       localStorage.removeItem('userToken');
     }
     this.loginService.userAdmin.set('');
@@ -40,5 +42,10 @@ export class HeaderComponent {
     this.loginService.searchStatus.set(this.searchText);
     //route to the browse books component if on another component
     this.router.navigate(['/books']);
+  }
+
+  //when user clicks on login
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

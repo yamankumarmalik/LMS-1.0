@@ -1,7 +1,4 @@
-<nav
-  *ngIf="loginStatus() === 'user'"
-  class="navbar navbar-expand-lg bg-body-tertiary sticky-top"
->
+<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
   <div class="container-fluid">
     <img
       src="https://littlefreelibrary.org/wp-content/uploads/2022/05/cropped-LFL_RGB_HorizonalTaglineLogo@2x.png"
@@ -29,10 +26,37 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="books">Browse Books</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="loginStatus() === 'user'">
           <a class="nav-link" routerLink="readingList">Reading List</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="loginStatus() === 'admin'">
+          <a class="nav-link active" aria-current="page" routerLink="/addBook"
+            >Add a Book</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="loginStatus() === 'admin'">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            routerLink="/addNewUser"
+            >Add new User</a
+          >
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="
+            this.loginService.userAdmin() !== 'user' &&
+            this.loginService.userAdmin() !== 'admin'
+          "
+        >
+          <a class="nav-link" routerLink="login" (click)="goToLogin()"
+            >Log In</a
+          >
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="loginStatus() === 'admin' || loginStatus() === 'user'"
+        >
           <a class="nav-link" routerLink="login" (click)="changeLoginStatus()"
             >Log Out</a
           >
@@ -42,72 +66,6 @@
         <input
           class="form-control me-2"
           type="search"
-          placeholder="Search"
-          aria-label="Search"
-          name="search"
-          [(ngModel)]="searchText"
-        />
-        <button
-          class="btn btn-outline-success"
-          type="button"
-          (click)="onSearch()"
-        >
-          Search
-        </button>
-      </form>
-    </div>
-  </div>
-</nav>
-
-<!-- if login status is true show this admin navbar -->
-<nav *ngIf="loginStatus()==='admin'" class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <img
-      src="https://littlefreelibrary.org/wp-content/uploads/2022/05/cropped-LFL_RGB_HorizonalTaglineLogo@2x.png"
-      id="brandImage"
-      class="brandImage"
-    />
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/books"
-            >Browse Books</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/addBook"
-            >Add a Book</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/addNewUser"
-            >Add new User</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="login" (click)="changeLoginStatus()"
-            >Log Out</a
-          >
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="text"
           placeholder="Search"
           aria-label="Search"
           name="search"

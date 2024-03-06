@@ -39,8 +39,10 @@ export class ReadingListComponent implements OnInit {
   //baseUrl for books array
   baseUrl: string = 'http://localhost:4000/books-api/all-books';
   //baseUrl for user reading list array
-  userEmail: string = this.loginService.userEmailSignal();
-  readingUrl: string = `http://localhost:4000/libUser-api/getUser/${this.userEmail}`;
+  userEmail = this.loginService.userEmailSignal;
+  readingUrl: string = `http://localhost:4000/libUser-api/getUser/${this.userEmail()}`;
+  //data to store if user list is empty
+  isEmpty = false;
 
   //ngOnInit function initializes the values when the component is loaded
   ngOnInit(): void {
@@ -86,6 +88,11 @@ export class ReadingListComponent implements OnInit {
             sticky: true,
           });
         }
+        
+        //if readingList is empty set isEmpty to true
+        if(books.payload.readingList.length === 0){
+          this.isEmpty = true;
+        }
       },
       error: (err) => console.log(err),
     });
@@ -93,27 +100,46 @@ export class ReadingListComponent implements OnInit {
 
   //function to be called when user click deleteBook button
   deleteBook(id: string) {
-    const url = `http://localhost:4000/libUser-api/remove-book/${this.userEmail}`;
-    this.httpClient.delete<any>(url).subscribe({
+    const url = `http://localhost:4000/libUser-api/add-reading-list/${this.userEmail()}`;
+    
+    //to delete the book from local array created
+    let index;
+    for (let i = 0; i < this.readingList.length; i++) {
+      if (this.readingList[i]._id === id) {
+        index = i;
+        break;
+      }
+    }
+    this.readingList.splice(index, 1);
+    //to delete the book from local array created
+    let index1;
+    for (let i = 0; i < this.displayList.length; i++) {
+      if (this.displayList[i]._id === id) {
+        index1 = i;
+        break;
+      }
+    }
+    this.displayList.splice(index1, 1);
+
+    //if after deleting readingList length becomes 0
+    if(this.displayList.length === 0){
+      this.isEmpty = true;
+    }
+
+    //updated User
+    const updatedUser = {
+      readingList: this.readingList
+    }
+
+    //request to update book array
+    this.httpClient.put<any>(url, updatedUser).subscribe({
       next: (res) => {
-        if (res.message === 'Book Deleted') {
-          this.toast.success({
-            detail: 'Book Deleted',
-            summary:
-              'Book with tile' + res.payload.title + 'deleted successfully.',
-            position: 'topCenter',
-            duration: 5000, //duration in ms
-          });
-          //to delete the book from local array created
-          let index;
-          for (let i = 0; i < this.book.length; i++) {
-            if (this.book[i].id === id) {
-              index = i;
-              break;
-            }
-          }
-          this.book.splice(index, 1);
-        }
+        this.toast.success({
+          detail: 'Book Removed successfully',
+          position: 'topCenter',
+          duration: 2000,
+        });
+
       },
       error: (err) => console.log(err),
     });

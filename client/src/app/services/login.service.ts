@@ -140,7 +140,10 @@ export class LoginService {
   //variable for the search service (a signal so the user knows when the status changes)
   searchStatus = signal('');
 
-  getUserById(email) {
-    return this.httpClient.get<any>('http://localhost:4000/', email);
+  //function so that when user refreshes angular knows that user is still logged in
+  checkUserToken(){
+    if(localStorage.getItem('userToken')){
+      this.userAdmin.set('user');
+    }
   }
 }

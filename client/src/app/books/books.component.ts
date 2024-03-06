@@ -44,6 +44,9 @@ export class BooksComponent implements OnInit {
 
   //ngOnInit function initializes the values when the component is loaded
   ngOnInit(): void {
+    //function to set login status
+    this.loginService.checkUserToken();
+
     this.httpClient.get<any>(this.baseUrl).subscribe({
       next: (books) => {
         if (books.message === 'books') {
@@ -119,14 +122,8 @@ export class BooksComponent implements OnInit {
     const findBook = this.readingList.find(function (book) {
       return book === id;
     });
-    if (findBook !== undefined) {
-      this.toast.error({
-        detail: 'Book already present in reading list!',
-        summary: 'Please add another book',
-        position: 'topCenter',
-        sticky: true,
-      });
-    } else {
+    //error handling if reading list is empty
+    if (this.readingList.length === 0) {
       this.readingList.push(id);
       const updatedUser = {
         username: this.username,
@@ -144,6 +141,33 @@ export class BooksComponent implements OnInit {
           console.log(err);
         },
       });
+    } else {
+      if (findBook !== undefined) {
+        this.toast.error({
+          detail: 'Book already present in reading list!',
+          summary: 'Please add another book',
+          position: 'topCenter',
+          sticky: true,
+        });
+      } else {
+        this.readingList.push(id);
+        const updatedUser = {
+          username: this.username,
+          readingList: this.readingList,
+        };
+        this.httpClient.put<any>(url, updatedUser).subscribe({
+          next: (res) => {
+            this.toast.success({
+              detail: 'Book Added successfully',
+              position: 'topCenter',
+              duration: 2000,
+            });
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
     }
   }
 }

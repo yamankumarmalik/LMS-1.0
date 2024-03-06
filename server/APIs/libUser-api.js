@@ -12,7 +12,6 @@ const {
   loginLibUser,
   readingList,
   getUser,
-  removeBook,
 } = require("../Controllers/libUser-controller");
 
 //libUser CRUD
@@ -25,7 +24,5 @@ libUserApp.get("/getUser/:userEmail", expressAsyncHandler(getUser));
 libUserApp.post("/login", expressAsyncHandler(loginLibUser));
 //add to reading list
 libUserApp.put("/add-reading-list/:username", expressAsyncHandler(readingList));
-//remove from reading list
-libUserApp.delete("/remove-book/:username", expressAsyncHandler(removeBook));
 
 module.exports = libUserApp;

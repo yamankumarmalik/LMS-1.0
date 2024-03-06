@@ -68,14 +68,6 @@ const readingList = async (req, res) => {
   res.status(201).send({ message: "Book Updated", payload: updateUser });
 };
 
-//remove book from readingList
-const removeBook = async (req, res) => {
-  const remove = await libUser.findOneAndDelete({
-    username: req.params.username,
-  });
-  res.status(200).send({ message: "Book Deleted", payload: remove });
-};
-
 //post Reading List array
 
 module.exports = {
@@ -83,5 +75,4 @@ module.exports = {
   loginLibUser,
   getUser,
   readingList,
-  removeBook,
 };

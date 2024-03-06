@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
+import { adminGuard } from './admin.guard';
 
 const routes: Routes = [
   {
@@ -31,25 +32,26 @@ const routes: Routes = [
   {
     path: 'addBook', //add book userAdmin
     component: AddBookComponent,
-    canActivate: [authGuard],
+    canActivate: [adminGuard],
   },
   {
     path: 'updateBook', //update Book detail userAdmin
     component: UpdateBookComponent,
-    canActivate: [authGuard],
+    canActivate: [adminGuard],
   },
   {
     path: 'addNewUser', //addNewUser
     component: AddNewUserComponent,
-    canActivate: [authGuard],
+    canActivate: [adminGuard],
   },
   {
     path: 'readingList', //userReadingList
-    component: ReadingListComponent
+    component: ReadingListComponent,
+    canActivate: [authGuard],
   },
   {
     path: '', //redirect to home component
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
   {
