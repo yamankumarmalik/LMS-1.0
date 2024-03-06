@@ -4,7 +4,7 @@
         <div
           class="books"
           *ngFor="
-            let book of book;
+            let book of displayList;
             let i = index
           "
         >
@@ -28,7 +28,7 @@
                   class="btn"
                   (click)="addBookToReadingList(book._id)"
                 >
-                  Add to ReadingList
+                  Delete from ReadingList
                 </button>
             </div>
           </div>

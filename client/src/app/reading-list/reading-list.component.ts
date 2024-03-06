@@ -34,13 +34,14 @@ export class ReadingListComponent implements OnInit {
   book: any[] = []; //array where the data is stored from json server [[{book data}]]
   //array to store user ReadList
   readingList: any[] = [];
+  //array to store the array data to be displayed
+  displayList: any[] = [];
   //baseUrl for books array
   baseUrl: string = 'http://localhost:4000/books-api/all-books';
   //baseUrl for user reading list array
   userEmail: string = this.loginService.userEmailSignal();
   readingUrl: string = `http://localhost:4000/libUser-api/getUser/${this.userEmail}`;
 
-  
   //ngOnInit function initializes the values when the component is loaded
   ngOnInit(): void {
     //books to show when the user is logged in
@@ -68,6 +69,15 @@ export class ReadingListComponent implements OnInit {
           for (let book of books.payload.readingList) {
             this.readingList.push(book);
           }
+
+          //logic to search for book_id from reading list in books array and then push that book object inside display array
+          for (let id of this.readingList) {
+            for (let book of this.book) {
+              if (book._id === id) {
+                this.displayList.push(book);
+              }
+            }
+          }
         } else {
           this.toast.error({
             detail: 'Some error occurred on the server!',
@@ -79,7 +89,33 @@ export class ReadingListComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
-    console.log(this.readingList);
   }
- 
+
+  //function to be called when user click deleteBook button
+  deleteBook(id: string) {
+    const url = `http://localhost:4000/libUser-api/remove-book/${this.userEmail}`;
+    this.httpClient.delete<any>(url).subscribe({
+      next: (res) => {
+        if (res.message === 'Book Deleted') {
+          this.toast.success({
+            detail: 'Book Deleted',
+            summary:
+              'Book with tile' + res.payload.title + 'deleted successfully.',
+            position: 'topCenter',
+            duration: 5000, //duration in ms
+          });
+          //to delete the book from local array created
+          let index;
+          for (let i = 0; i < this.book.length; i++) {
+            if (this.book[i].id === id) {
+              index = i;
+              break;
+            }
+          }
+          this.book.splice(index, 1);
+        }
+      },
+      error: (err) => console.log(err),
+    });
+  }
 }

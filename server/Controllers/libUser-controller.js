@@ -21,7 +21,6 @@ const createLibUser = async (req, res) => {
   res.status(201).send({ message: "User created", payload: newUser });
 };
 
-
 //User login
 const loginLibUser = async (req, res) => {
   //get user credentials object from req
@@ -52,24 +51,30 @@ const loginLibUser = async (req, res) => {
     .send({ message: "login success", token: signedToken, payload: user });
 };
 
-
 //const getUser
-const getUser = async(req,res)=>{
+const getUser = async (req, res) => {
   let user = await libUser.findOne({
     username: req.params.userEmail,
   });
-  res.status(201).send({message: "User Found", payload: user});
-}
+  res.status(201).send({ message: "User Found", payload: user });
+};
 
 //update User to update Book Array
-const readingList = async(req,res) =>{
+const readingList = async (req, res) => {
   const updateUser = await libUser.findOneAndUpdate(
     { username: req.params.username },
     { ...req.body }
   );
   res.status(201).send({ message: "Book Updated", payload: updateUser });
-}
+};
 
+//remove book from readingList
+const removeBook = async (req, res) => {
+  const remove = await libUser.findOneAndDelete({
+    username: req.params.username,
+  });
+  res.status(200).send({ message: "Book Deleted", payload: remove });
+};
 
 //post Reading List array
 
@@ -78,4 +83,5 @@ module.exports = {
   loginLibUser,
   getUser,
   readingList,
+  removeBook,
 };
