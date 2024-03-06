@@ -80,7 +80,8 @@
   border-radius: 20px;
 }
 .readingList {
-  gap: 5%;
+  margin-top: 5%;
+  margin-left: 5%;
 }
 #readingList {
   font-family: Arial, Helvetica, sans-serif;
