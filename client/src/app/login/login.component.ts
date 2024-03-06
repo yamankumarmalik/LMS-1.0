@@ -33,10 +33,4 @@ export class LoginComponent implements OnInit {
       this.loginService.checkAdmin(this.loginForm.value);
     }
   }
-
-  changeUser() {
-    this.isLogin = !this.isLogin;
-  }
-
-  
 }

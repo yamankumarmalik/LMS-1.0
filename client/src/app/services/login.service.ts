@@ -36,8 +36,8 @@ export class LoginService {
           return this.toast.error({
             detail: 'Please Enter a valid Username',
             summary: 'Username is invalid',
-            sticky: true,
             position: 'topCenter',
+            duration: 2000,
           });
         }
         if (res.message === 'Invalid password') {
@@ -45,8 +45,8 @@ export class LoginService {
           return this.toast.error({
             detail: 'Please Enter the correct Password',
             summary: 'Password is incorrect!',
-            sticky: true,
             position: 'topCenter',
+            duration: 2000,
           });
         }
         if (res.message === 'login success') {
@@ -59,7 +59,7 @@ export class LoginService {
             detail: 'Login Success',
             summary: 'Admin Login is successful!',
             position: 'topCenter',
-            duration: 5000,
+            duration: 1500,
           });
           //navigate to books
           // this.userEmailSignal.set(res.payload.username);
@@ -85,8 +85,8 @@ export class LoginService {
           return this.toast.error({
             detail: 'Please Enter a valid Username',
             summary: 'Username is invalid',
-            sticky: true,
             position: 'topCenter',
+            duration: 2000,
           });
         }
         if (res.message === 'Invalid password') {
@@ -94,8 +94,8 @@ export class LoginService {
           return this.toast.error({
             detail: 'Please Enter the correct Password',
             summary: 'Password is incorrect!',
-            sticky: true,
             position: 'topCenter',
+            duration: 2000,
           });
         }
         if (res.message === 'login success') {
@@ -108,7 +108,7 @@ export class LoginService {
             detail: 'Login Success',
             summary: 'User Login is successful!',
             position: 'topCenter',
-            duration: 5000,
+            duration: 1500,
           });
           //navigate to books
           this.userEmailSignal.set(res.payload.username);
@@ -141,9 +141,14 @@ export class LoginService {
   searchStatus = signal('');
 
   //function so that when user refreshes angular knows that user is still logged in
-  checkUserToken(){
-    if(localStorage.getItem('userToken')){
+  checkUserToken() {
+    if (localStorage.getItem('userToken')) {
       this.userAdmin.set('user');
     }
+  }
+
+  //function to route to browse books on search
+  route() {
+    this.router.navigate(['/books']);
   }
 }

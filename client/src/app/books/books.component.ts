@@ -66,17 +66,19 @@ export class BooksComponent implements OnInit {
     });
     this.loginStatus = this.loginService.userAdmin;
 
-    //to get user object
-    const userURL = `http://localhost:4000/libUser-api/getUser/${this.loginService.userEmailSignal()}`;
-    this.httpClient.get<any>(userURL).subscribe({
-      next: (res) => {
-        this.username = res.payload.username;
-        this.readingList = res.payload.readingList;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    if (this.loginService.userAdmin() === 'user') {
+      //to get user object
+      const userURL = `http://localhost:4000/libUser-api/getUser/${this.loginService.userEmailSignal()}`;
+      this.httpClient.get<any>(userURL).subscribe({
+        next: (res) => {
+          this.username = res.payload.username;
+          this.readingList = res.payload.readingList;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   //function to be called when user click deleteBook button

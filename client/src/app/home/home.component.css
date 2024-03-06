@@ -1,6 +1,6 @@
 /* setting minimum container height */
 .container {
-  min-height: 700px;
+  min-height: 70vh;
 }
 
 /* setting display flex */

@@ -88,9 +88,9 @@ export class ReadingListComponent implements OnInit {
             sticky: true,
           });
         }
-        
+
         //if readingList is empty set isEmpty to true
-        if(books.payload.readingList.length === 0){
+        if (books.payload.readingList.length === 0) {
           this.isEmpty = true;
         }
       },
@@ -101,7 +101,7 @@ export class ReadingListComponent implements OnInit {
   //function to be called when user click deleteBook button
   deleteBook(id: string) {
     const url = `http://localhost:4000/libUser-api/add-reading-list/${this.userEmail()}`;
-    
+
     //to delete the book from local array created
     let index;
     for (let i = 0; i < this.readingList.length; i++) {
@@ -122,24 +122,24 @@ export class ReadingListComponent implements OnInit {
     this.displayList.splice(index1, 1);
 
     //if after deleting readingList length becomes 0
-    if(this.displayList.length === 0){
+    if (this.displayList.length === 0) {
       this.isEmpty = true;
     }
 
     //updated User
     const updatedUser = {
-      readingList: this.readingList
-    }
+      readingList: this.readingList,
+    };
 
     //request to update book array
     this.httpClient.put<any>(url, updatedUser).subscribe({
       next: (res) => {
         this.toast.success({
           detail: 'Book Removed successfully',
+          summary: 'Your book was successfully removed from the reading List!',
           position: 'topCenter',
-          duration: 2000,
+          duration: 1000,
         });
-
       },
       error: (err) => console.log(err),
     });

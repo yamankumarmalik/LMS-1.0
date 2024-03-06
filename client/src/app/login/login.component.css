@@ -93,10 +93,27 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+#switch {
+  background-color: #0d3563;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #0066cc;
+  border-radius: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 .submitButton {
   text-align: center;
   margin-top: 40px;
+}
+
+.loginForm {
+  width: 50%;
 }
 
 /* css for mobile screens */
@@ -109,7 +126,7 @@
 
   /* increase height of container */
   .container {
-    height: 1000px !important;
+    height: 70rem !important;
     background-color: #f5f5f7;
   }
 

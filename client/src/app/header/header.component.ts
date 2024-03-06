@@ -38,10 +38,10 @@ export class HeaderComponent implements OnInit {
   searchText = '';
   // when the user searches for any particular book
   onSearch() {
-    //setting the value of the signal when user clicks the search button
-    this.loginService.searchStatus.set(this.searchText);
     //route to the browse books component if on another component
     this.router.navigate(['/books']);
+    //setting the value of the signal when user clicks the search button
+    this.loginService.searchStatus.set(this.searchText);
   }
 
   //when user clicks on login
