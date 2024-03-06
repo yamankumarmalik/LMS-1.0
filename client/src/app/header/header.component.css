@@ -1,0 +1,52 @@
+/* to set container background color */
+.navbar {
+  background-color: #e6e6e6 !important;
+  font-size: 18px;
+}
+/* to rearrange the navbar for visual betterment */
+.navbar .navbar-collapse {
+  padding-left: 2%;
+}
+
+/* to resize the navbar logo */
+.brandImage {
+  height: auto;
+  width: 18%;
+}
+
+/* to make the search field inside */
+.d-flex {
+  margin-right: 2%;
+}
+
+/* to change search button color */
+.btn {
+  color: #f56300;
+  border-color: #f56300;
+}
+.btn:hover {
+  background-color: #e6e6e6;
+  color: #0066cc;
+  border-color: #0066cc;
+}
+
+/* media queries to make the header responsive for mobile */
+@media only screen and (max-width: 480px) {
+  /* styles for mobile */
+
+  /* to resize the navbar logo */
+  .brandImage {
+    height: auto;
+    width: 60%;
+  }
+}
+
+/* media query for tablet */
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+  /* styles for tablet */
+  /* to resize the navbar logo */
+  .brandImage {
+    height: 25%;
+    width: 40%;
+  }
+}

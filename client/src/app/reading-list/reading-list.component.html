@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+      <section class="booksSection">
+        <div
+          class="books"
+          *ngFor="
+            let book of book;
+            let i = index
+          "
+        >
+          <div class="card" style="width: 16rem; height: 100%">
+            <img
+              src="{{ book.image }}"
+              class="card-img-top"
+              alt="{{ book.alt }}"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Title: {{ book.title }}</h5>
+              <p class="card-text" id="genre">Genre: {{ book.genre }}</p>
+              <p class="card-text" id="pageCount">
+                Page Count: {{ book.pageCount }}
+              </p>
+              <p class="card-text" id="quantity">Quantity: {{ book.quantity }}</p>
+              <p class="card-text" id="authors">Authors: {{ book.author }}</p>
+              <button
+                  type="button"
+                  id="readingList"
+                  class="btn"
+                  (click)="addBookToReadingList(book._id)"
+                >
+                  Add to ReadingList
+                </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>

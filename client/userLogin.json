@@ -1,0 +1,100 @@
+{
+  "admins": [
+    {
+      "username": "Cognizant",
+      "password": "Hello123",
+      "id": "d4f7"
+    },
+    {
+      "id": "d169",
+      "username": "Cognizant",
+      "password": "1234"
+    }
+  ],
+  "books": [
+    {
+      "isbn": 9781786330895,
+      "title": "Ikigai",
+      "genre": "Philosophy",
+      "pageCount": 208,
+      "price": 396,
+      "quantity": 10,
+      "author": "Francesc Miralles",
+      "image": "https://www.bookswagon.com/productimages/images200/895/9781786330895.jpg",
+      "altText": "Book Cover Ikigai",
+      "id": "d6b7"
+    },
+    {
+      "id": "4413",
+      "isbn": 9781847941831,
+      "title": "Atomic Habits",
+      "genre": "Self Help",
+      "pageCount": 320,
+      "price": 551,
+      "quantity": 4,
+      "author": "James Clear",
+      "image": "https://www.bookswagon.com/productimages/images200/831/9781847941831.jpg",
+      "altText": "Atomic Habits Book Cover"
+    },
+    {
+      "id": "8f9c",
+      "isbn": 9781612681139,
+      "title": "Rich Dad Poor Dad",
+      "genre": "Personal Finance",
+      "pageCount": 336,
+      "price": 425,
+      "quantity": 2,
+      "author": "Robert T Kiyosaki",
+      "image": "https://www.bookswagon.com/productimages/images200/139/9781612681139.jpg",
+      "altText": "Rich Dad Poor Dad Book Cover"
+    },
+    {
+      "id": "6dd9",
+      "isbn": 9780691182155,
+      "title": "Deportation Machine",
+      "genre": "Genral & World History",
+      "pageCount": 336,
+      "price": 2827,
+      "quantity": 1,
+      "author": "Adam Goodman",
+      "image": "https://www.bookswagon.com/productimages/images200/155/9780691182155.jpg",
+      "altText": "Deportation Machine Book Cover"
+    },
+    {
+      "id": "352a",
+      "isbn": 9789390166268,
+      "title": "The Psychology of Money",
+      "genre": "Self Help",
+      "pageCount": 252,
+      "price": 363,
+      "quantity": 4,
+      "author": "Morgan Housel",
+      "image": "https://www.bookswagon.com/productimages/images200/268/9789390166268.jpg",
+      "altText": "The Psychology of Money Book Cover"
+    },
+    {
+      "id": "3f9a",
+      "isbn": 9780593086117,
+      "title": "Clear Thinking",
+      "genre": "Learning",
+      "pageCount": 288,
+      "price": 1587,
+      "quantity": 1,
+      "author": "Shane Parrish",
+      "image": "https://www.bookswagon.com/productimages/images200/117/9780593086117.jpg",
+      "altText": "Clear Thinking Book Cover"
+    },
+    {
+      "id": "8880",
+      "isbn": 9780143459132,
+      "title": "Bad Liars",
+      "genre": "Thriller/Suspense",
+      "pageCount": 216,
+      "price": 119,
+      "quantity": 12,
+      "author": "Vikrant Khanna",
+      "image": "https://www.bookswagon.com/productimages/images200/132/9780143459132.jpg",
+      "altText": "Bad Liars Book Cover"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+/* css for container */
+.container {
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    max-width: 100vw;
+    min-height: 80vh;
+  }
+  
+  /* setting height and width for row */
+  .row {
+    width: 100%;
+    height: fit-content;
+  }
+  
+  /* css for books section with books array */
+  .booksSection {
+    /* to display the cards in flex */
+    display: grid;
+    grid-template-columns: repeat(4, 33%);
+    padding-left: 5vw;
+    width: 80vw;
+  }
+  
+  /* css for books div which contains card */
+  .books {
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    width: 75%;
+  }
+  
+  /* css for card image */
+  .card img {
+    height: 15rem;
+  }
+  
+  /* css for card-body */
+  .card-body {
+    padding-right: 0;
+    background-color: rgba(199, 243, 242, 0.332);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* card-text inside card */
+  .card-text {
+    margin: 5px;
+  }
+  
+  /* card-title */
+  .card-title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  /* css style for delete button and update button */
+  .button {
+    display: flex;
+    gap: 5%;
+  }
+  #readingList {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #0066cc;
+    border-radius: 20px;
+    margin-left: 18%;
+  }
+  
+  /* media queries to make the ui responsive */
+  @media only screen and (max-width: 480px) {
+    /* Styles for mobiles */
+  
+    /* container*/
+    .container {
+      margin: 0;
+      width: 100%;
+      height: fit-content;
+    }
+    /* style for sideSection and bookSection */
+    .row {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+  
+    /* css for booksSection where books are displayed*/
+    .booksSection {
+      /* to display the cards in flex */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* to make the card centered and fill the screen */
+    .books {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  /* media queries for tablets */
+  @media only screen and (min-width: 481px) and (max-width: 1024px) {
+    /* styles for tablets */
+    /* css for books section with books array */
+    .container {
+      height: fit-content;
+    }
+    .booksSection {
+      /* to display the cards in flex */
+      display: grid;
+      grid-template-columns: repeat(3, 40%);
+      width: 85vw;
+      padding-left: 5%;
+      column-gap: 1%;
+      margin-bottom: 2%;
+    }
+    .books {
+      margin: 0;
+      padding: 0;
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+  }
+  

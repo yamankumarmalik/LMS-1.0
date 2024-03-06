@@ -1,0 +1,102 @@
+<!-- this container will be displayed when the user is not admin -->
+<div *ngIf="loginStatus() === 'user'" class="container">
+  <div class="row">
+    <section class="filterSection">
+      <div class="sideContent">
+        <p>It works!</p>
+      </div>
+    </section>
+    <section class="booksSection">
+      <div
+        class="books"
+        *ngFor="
+          let book of book | search : this.loginService.searchStatus();
+          let i = index
+        "
+      >
+        <div class="card" style="width: 16rem; height: 100%">
+          <img
+            src="{{ book.image }}"
+            class="card-img-top"
+            alt="{{ book.alt }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Title: {{ book.title }}</h5>
+            <p class="card-text" id="genre">Genre: {{ book.genre }}</p>
+            <p class="card-text" id="pageCount">
+              Page Count: {{ book.pageCount }}
+            </p>
+            <p class="card-text" id="quantity">Quantity: {{ book.quantity }}</p>
+            <p class="card-text" id="authors">Authors: {{ book.author }}</p>
+            <button
+                type="button"
+                id="readingList"
+                class="btn"
+                (click)="addToReadingList(book._id)" 
+              >
+                Add to ReadingList
+              </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- container for user Admin  -->
+<div *ngIf="loginStatus() === 'admin'" class="container userAdmin">
+  <div class="row">
+    <section class="filterSection">
+      <div class="sideContent">
+        <p>It works!</p>
+      </div>
+    </section>
+    <section class="booksSection">
+      <div
+        class="books"
+        *ngFor="
+          let book of book | search : this.loginService.searchStatus();
+          let i = index
+        "
+      >
+        <div class="card" style="width: 18rem">
+          <img
+            src="{{ book.image }}"
+            class="card-img-top"
+            alt="{{ book.alt }}"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Title: {{ book.title }}</h5>
+            <p class="card-text" id="genre">Genre: {{ book.genre }}</p>
+            <p class="card-text" id="pageCount">
+              Page Count: {{ book.pageCount }}
+            </p>
+            <p class="card-text" id="quantity">Quantity: {{ book.quantity }}</p>
+            <p class="card-text" id="price">
+              Price: {{ book.price | currency : "INR" }}
+            </p>
+            <p class="card-text" id="authors">Authors: {{ book.author }}</p>
+            <div class="button">
+              <button
+                type="button"
+                id="deleteBook"
+                class="btn"
+                (click)="deleteBook(book._id)"
+              >
+                Delete Book
+              </button>
+              <button
+                type="button"
+                id="updateBook"
+                class="btn"
+                (click)="showBook(book._id)"
+              >
+                Update Book
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

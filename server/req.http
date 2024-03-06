@@ -1,0 +1,11 @@
+get http://localhost:4000/libUser-api/getUser/yamankumarmalik007@gmail.com
+
+
+###
+put http://localhost:4000/libUser-api/add-reading-list/yamankumarmalik007@gmail.com
+Content-Type: application/json
+
+{
+   "username": "yamankumarmalik007@gmail.com",
+   "readingList": [1]
+}

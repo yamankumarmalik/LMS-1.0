@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <form [formGroup]="updateBookForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="isbn" class="form-label">Isbn*</label>
+          <input
+            type="number"
+            id="isbn"
+            class="form-control"
+            formControlName="isbn"
+            [value]="this.bookService.isbn"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title*</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            formControlName="title"
+            [value]="this.bookService.title"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="genre" class="form-label">Genre*</label>
+          <input
+            type="text"
+            id="genre"
+            class="form-control"
+            formControlName="genre"
+            [value]="this.bookService.genre"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="pageCount" class="form-label">PageCount*</label>
+          <input
+            type="number"
+            id="pageCount"
+            class="form-control"
+            formControlName="pageCount"
+            [value]="this.bookService.pageCount"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price*</label>
+          <input
+            type="number"
+            id="price"
+            class="form-control"
+            formControlName="price"
+            [value]="this.bookService.price"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantity*</label>
+          <input
+            type="number"
+            id="quantity"
+            class="form-control"
+            formControlName="quantity"
+            [value]="this.bookService.quantity"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author*</label>
+          <input
+            type="text"
+            id="author"
+            class="form-control"
+            formControlName="author"
+            [value]="this.bookService.author"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image Link*</label>
+          <input
+            type="text"
+            id="image"
+            class="form-control"
+            formControlName="image"
+            [value]="this.bookService.image"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="altText" class="form-label">Alt Text*</label>
+          <input
+            type="text"
+            id="altText"
+            class="form-control"
+            formControlName="altText"
+            [value]="this.bookService.altText"
+          />
+        </div>
+        <div class="button">
+          <button id="addBook" class="btn" type="submit">
+            Update Book Details
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+.container {
+  height: 80vh;
+  margin-bottom: 20px;
+}
+
+/* content */
+.content {
+  width: 50%;
+  margin-top: 5%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #5e5e5e;
+}
+
+.content h3 {
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333333;
+  font-weight: bold;
+}
+
+.content h4 {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #5e5e5e;
+  font-weight: bold;
+}
+
+.content button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #568f90;
+  border-radius: 20px;
+}
+
+/* Form content */
+.loginForm {
+  margin-top: 3%;
+  margin-left: 15%;
+  width: 30%;
+  height: 90%;
+  text-align: center;
+}
+
+.card {
+  padding: 10px;
+  border-radius: 5%;
+  margin-top: 15px;
+  text-align: end;
+}
+
+.card h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 36px;
+  text-align: center;
+  color: #333333;
+}
+
+/*username input field*/
+#username {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #5e5e5e;
+  background-color: #f2f2f2;
+}
+
+/* Password input field */
+#password {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #5e5e5e;
+  background-color: #f2f2f2;
+}
+
+/* Link for forgot Password */
+#forgotPassword {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #00aeef;
+}
+
+#submit {
+  background-color: #0d3563;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #ffffff;
+  border-radius: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.submitButton {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* css for mobile screens */
+@media only screen and (max-width: 600px) {
+  .d-flex {
+    flex-direction: column;
+    align-items: center;
+    height: 1000px;
+  }
+
+  /* increase height of container */
+  .container {
+    height: 1000px !important;
+    background-color: #e4e4e4;
+  }
+
+  .loginForm {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    padding-top: 30px;
+  }
+}
