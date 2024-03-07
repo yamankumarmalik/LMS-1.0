@@ -17,12 +17,20 @@ const {
 //libUser CRUD
 
 //create new libUser
-libUserApp.post("/create-libUser", expressAsyncHandler(createLibUser));
+libUserApp.post(
+  "/create-libUser",
+  verifyToken,
+  expressAsyncHandler(createLibUser)
+);
 //get User
 libUserApp.get("/getUser/:userEmail", expressAsyncHandler(getUser));
 //user login
 libUserApp.post("/login", expressAsyncHandler(loginLibUser));
 //add to reading list
-libUserApp.put("/add-reading-list/:username", expressAsyncHandler(readingList));
+libUserApp.put(
+  "/add-reading-list/:username",
+  verifyToken,
+  expressAsyncHandler(readingList)
+);
 
 module.exports = libUserApp;

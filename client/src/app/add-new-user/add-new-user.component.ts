@@ -21,9 +21,22 @@ export class AddNewUserComponent implements OnInit {
 
   //ngOnInit() is initialized when the component is loaded for the first time
   ngOnInit(): void {
+    //function to set login status
+    this.loginService.checkUserToken();
+    
     this.addNewUser = new FormGroup({
-      username: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
+      username: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.pattern(
+          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{5,}'
+        ),
+      ]),
     });
   }
 
@@ -40,10 +53,10 @@ export class AddNewUserComponent implements OnInit {
           });
         } else {
           this.toast.success({
-            detail: 'Admin Data was successfully inserted in database!',
+            detail: 'New User was successfully inserted in database!',
             summary: 'Username: ' + res.payload.username,
             position: 'topCenter',
-            duration: 5000,
+            duration: 1000,
           });
           this.addNewUser.reset();
         }

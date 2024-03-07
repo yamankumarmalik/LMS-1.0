@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, OnDestroy } from '@angular/core';
 //booksService import
 import { BooksService } from '../services/books.service';
 //loginService import
@@ -19,7 +19,7 @@ import { NgToastService } from 'ng-angular-popup';
   templateUrl: './books.component.html',
   styleUrl: './books.component.css',
 })
-export class BooksComponent implements OnInit {
+export class BooksComponent implements OnInit, OnDestroy {
   //inject login service
   loginService = inject(LoginService);
   //inject book service
@@ -32,8 +32,6 @@ export class BooksComponent implements OnInit {
   toast = inject(NgToastService);
 
   constructor() {}
-  //signal variable declaration
-  loginStatus;
   //array to store books array returned from the json server
   book: any[] = []; //array where the data is stored from json server [[{book data}]]
   //baseUrl for books array
@@ -46,6 +44,9 @@ export class BooksComponent implements OnInit {
   ngOnInit(): void {
     //function to set login status
     this.loginService.checkUserToken();
+
+    //set headerSearch signal value when component is loaded
+    this.bookService.headerSearch.set('browse');
 
     this.httpClient.get<any>(this.baseUrl).subscribe({
       next: (books) => {
@@ -64,7 +65,6 @@ export class BooksComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
-    this.loginStatus = this.loginService.userAdmin;
 
     if (this.loginService.userAdmin() === 'user') {
       //to get user object
@@ -92,7 +92,7 @@ export class BooksComponent implements OnInit {
               summary:
                 'Book with tile' + res.payload.title + 'deleted successfully.',
               position: 'topCenter',
-              duration: 5000, //duration in ms
+              duration: 1000, //duration in ms
             });
             //to delete the book from local array created
             let index;
@@ -135,6 +135,7 @@ export class BooksComponent implements OnInit {
         next: (res) => {
           this.toast.success({
             detail: 'Book Added successfully',
+            summary: 'Your book was added to your Reading List!',
             position: 'topCenter',
             duration: 2000,
           });
@@ -149,7 +150,7 @@ export class BooksComponent implements OnInit {
           detail: 'Book already present in reading list!',
           summary: 'Please add another book',
           position: 'topCenter',
-          sticky: true,
+          duration: 1000,
         });
       } else {
         this.readingList.push(id);
@@ -161,6 +162,7 @@ export class BooksComponent implements OnInit {
           next: (res) => {
             this.toast.success({
               detail: 'Book Added successfully',
+              summary: 'Added to Reading LIst',
               position: 'topCenter',
               duration: 2000,
             });
@@ -171,5 +173,10 @@ export class BooksComponent implements OnInit {
         });
       }
     }
+  }
+
+  //when component is destroyed
+  ngOnDestroy(): void {
+    this.bookService.headerSearch.set('');
   }
 }

@@ -3,6 +3,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 //login Service
 import { LoginService } from '../services/login.service';
+//book Service
+import { BooksService } from '../services/books.service';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +14,8 @@ import { LoginService } from '../services/login.service';
 export class HeaderComponent implements OnInit {
   //inject the login Service
   loginService = inject(LoginService);
+  //inject book Service
+  bookService = inject(BooksService);
 
   //variable to store login status (Log in or out)
   loginStatus;

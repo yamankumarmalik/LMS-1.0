@@ -19,7 +19,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="home">Home</a>
+          <a
+            class="nav-link"
+            aria-current="page"
+            routerLink="home"
+            *ngIf="this.loginService.userAdmin() !== 'admin'"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="books">Browse Books</a>
@@ -28,15 +34,12 @@
           <a class="nav-link" routerLink="readingList">Reading List</a>
         </li>
         <li class="nav-item" *ngIf="loginStatus() === 'admin'">
-          <a class="nav-link active" aria-current="page" routerLink="/addBook"
+          <a class="nav-link" aria-current="page" routerLink="/addBook"
             >Add a Book</a
           >
         </li>
         <li class="nav-item" *ngIf="loginStatus() === 'admin'">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/addNewUser"
+          <a class="nav-link" aria-current="page" routerLink="/addNewUser"
             >Add new User</a
           >
         </li>
@@ -60,7 +63,11 @@
           >
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <form
+        class="d-flex"
+        role="search"
+        *ngIf="this.bookService.headerSearch() === 'browse'"
+      >
         <input
           class="form-control me-2"
           type="search"

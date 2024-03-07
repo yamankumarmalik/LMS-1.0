@@ -67,17 +67,17 @@ const bookSchema = new mongoose.Schema({
 const libUserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, "Username is required!"]
+    required: [true, "Username is required!"],
   },
   password: {
     type: String,
-    required: [true, "Password is required"]
+    required: [true, "Password is required"],
   },
   readingList: {
     type: Array,
-    required: [true, "Reading List is required!"]
-  }
-})
+    required: [true, "Reading List is required!"],
+  },
+});
 
 //create Model(class) for the userSchema
 const User = mongoose.model("user", userSchema);

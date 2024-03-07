@@ -1,12 +1,10 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, OnDestroy } from '@angular/core';
 //bookService import
 import { BooksService } from '../services/books.service';
 //loginService import
 import { LoginService } from '../services/login.service';
 //httpClient import
 import { HttpClient } from '@angular/common/http';
-//books Model import
-import { Books } from '../models/books';
 // import router
 import { Router } from '@angular/router';
 //import ng-popup
@@ -17,7 +15,7 @@ import { NgToastService } from 'ng-angular-popup';
   templateUrl: './reading-list.component.html',
   styleUrl: './reading-list.component.css',
 })
-export class ReadingListComponent implements OnInit {
+export class ReadingListComponent implements OnInit, OnDestroy {
   //inject login service
   loginService = inject(LoginService);
   //inject book service
@@ -30,6 +28,7 @@ export class ReadingListComponent implements OnInit {
   toast = inject(NgToastService);
 
   constructor() {}
+
   //array to store books array returned from the json server
   book: any[] = []; //array where the data is stored from json server [[{book data}]]
   //array to store user ReadList
@@ -46,7 +45,12 @@ export class ReadingListComponent implements OnInit {
 
   //ngOnInit function initializes the values when the component is loaded
   ngOnInit(): void {
-    //books to show when the user is logged in
+    //function to set login status
+    this.loginService.checkUserToken();
+
+    //set headerSearch to 'readingList'
+    this.bookService.headerSearch.set('readingList');
+    //all books to show when the user is logged in
     this.httpClient.get<any>(this.baseUrl).subscribe({
       next: (books) => {
         if (books.message === 'books') {
@@ -64,7 +68,7 @@ export class ReadingListComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
-    //books to show when the user is logged in
+    //readingList to show when the user is logged in
     this.httpClient.get<any>(this.readingUrl).subscribe({
       next: (books) => {
         if (books.message === 'User Found') {
@@ -144,4 +148,7 @@ export class ReadingListComponent implements OnInit {
       error: (err) => console.log(err),
     });
   }
+
+  //runs when component is destroyed
+  ngOnDestroy(): void {}
 }

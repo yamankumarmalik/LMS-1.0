@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,11 @@ import { Component, OnInit, inject } from '@angular/core';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  ngOnInit(): void {}
+  //loginService
+  loginService = inject(LoginService);
+
+  ngOnInit(): void {
+    //function to set login status
+    this.loginService.checkUserToken();
+  }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddBookComponent } from './add-book/add-book.component';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
-import { authGuard } from './auth.guard';
+import { authGuard } from './auth/auth.guard';
 import { BooksComponent } from './books/books.component';
 import { HomeComponent } from './home/home.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
-import { adminGuard } from './admin.guard';
+import { adminGuard } from './auth/admin.guard';
 
 const routes: Routes = [
   {

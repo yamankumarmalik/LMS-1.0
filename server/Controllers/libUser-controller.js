@@ -44,7 +44,7 @@ const loginLibUser = async (req, res) => {
   const signedToken = jwt.sign(
     { username: user.username },
     process.env.SECRET_KEY,
-    { expiresIn: "1d" }
+    { expiresIn: "12h" }
   );
   res
     .status(200)
@@ -63,7 +63,8 @@ const getUser = async (req, res) => {
 const readingList = async (req, res) => {
   const updateUser = await libUser.findOneAndUpdate(
     { username: req.params.username },
-    { ...req.body }
+    { ...req.body },
+    { returnNewDocument: true }
   );
   res.status(201).send({ message: "Book Updated", payload: updateUser });
 };

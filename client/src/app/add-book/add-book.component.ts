@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BooksService } from '../services/books.service';
 //Popup Service
 import { NgToastService } from 'ng-angular-popup';
+//loginService
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-add-book',
@@ -16,25 +18,67 @@ export class AddBookComponent implements OnInit {
   bookService = inject(BooksService);
   //inject Popup Service
   toast = inject(NgToastService);
+  //inject Login Service
+  loginService = inject(LoginService);
 
   //declaring form group
   addBookForm: FormGroup;
 
   //ngOnInit initializes the values when the component is loaded
   ngOnInit(): void {
+    //function to set login status
+    this.loginService.checkUserToken();
+
     this.addBookForm = new FormGroup({
       isbn: new FormControl(null, [
         Validators.required,
         Validators.minLength(13),
+        Validators.maxLength(13),
       ]),
-      title: new FormControl(null, Validators.required),
-      genre: new FormControl(null, Validators.required),
-      pageCount: new FormControl(null, Validators.required),
-      price: new FormControl(null, Validators.required),
-      quantity: new FormControl(null, Validators.required),
-      author: new FormControl(null, Validators.required),
-      image: new FormControl(null, Validators.required),
-      altText: new FormControl(null, Validators.required),
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(13),
+        Validators.maxLength(13),
+        Validators.pattern('^(a-zA-Z )*$'),
+      ]),
+      genre: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^(a-zA-Z )*$'),
+        Validators.minLength(1),
+        Validators.maxLength(25),
+      ]),
+      pageCount: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(4),
+      ]),
+      price: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(10),
+      ]),
+      quantity: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(2),
+      ]),
+      author: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^(a-zA-Z )*$'),
+        Validators.minLength(1),
+        Validators.maxLength(50),
+      ]),
+      image: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(50),
+      ]),
+      altText: new FormControl(null, [
+        Validators.required,
+        Validators.pattern('^(a-zA-Z )*$'),
+        Validators.minLength(5),
+        Validators.maxLength(50),
+      ]),
     });
   }
 

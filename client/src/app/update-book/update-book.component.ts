@@ -4,6 +4,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BooksService } from '../services/books.service';
 //router import
 import { Router } from '@angular/router';
+//loginService import
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-update-book',
@@ -11,23 +13,69 @@ import { Router } from '@angular/router';
   styleUrl: './update-book.component.css',
 })
 export class UpdateBookComponent implements OnInit {
+  //inject loginService
+  loginService = inject(LoginService);
   //inject booksService
   bookService = inject(BooksService);
   // inject router
   router = inject(Router);
   //form group name for updating books details
   updateBookForm = new FormGroup({
-    isbn: new FormControl(''),
-    title: new FormControl(''),
-    genre: new FormControl(''),
-    pageCount: new FormControl(''),
-    price: new FormControl(''),
-    quantity: new FormControl(''),
-    author: new FormControl(''),
-    image: new FormControl(''),
-    altText: new FormControl(''),
+    isbn: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(13),
+      Validators.maxLength(13),
+    ]),
+    title: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(13),
+      Validators.maxLength(13),
+      Validators.pattern('^(a-zA-Z )*$'),
+    ]),
+    genre: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^(a-zA-Z )*$'),
+      Validators.minLength(1),
+      Validators.maxLength(25),
+    ]),
+    pageCount: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(4),
+    ]),
+    price: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.maxLength(10),
+    ]),
+    quantity: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(2),
+    ]),
+    author: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^(a-zA-Z )*$'),
+      Validators.minLength(1),
+      Validators.maxLength(50),
+    ]),
+    image: new FormControl(null, [
+      Validators.required,
+      Validators.minLength(1),
+      Validators.maxLength(50),
+    ]),
+    altText: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('^(a-zA-Z )*$'),
+      Validators.minLength(5),
+      Validators.maxLength(50),
+    ]),
   });
+
   ngOnInit(): void {
+    //function to set login status
+    this.loginService.checkUserToken();
+
     //calling the function showBook to set the default values in the form for user to edit
     this.bookService.showBook(this.bookService.bookId()).subscribe({
       next: (res) => {

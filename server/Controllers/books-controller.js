@@ -31,7 +31,6 @@ const deleteBook = async (req, res) => {
 
 //update a book
 const updateBook = async (req, res) => {
-  const user = req.body;
   const updateBook = await Books.findOneAndUpdate(
     { isbn: req.body.isbn },
     { ...req.body }

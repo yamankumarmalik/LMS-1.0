@@ -14,14 +14,13 @@ export class BooksService {
   //base url for accessing the books array on json server
   private url = 'http://localhost:4000/books-api';
 
+  //signal to change when user clicks on browse books or readingList
+  headerSearch = signal('');
+
   //function to add a new book in the books array on json server
   addBook(book: any) {
     //this function return observable so we need to subscribe to this observable in the component to execute this request
-    return this.httpClient.post<Books|any>(this.url + '/add-new-book', book, {
-      headers: {
-        authorization: localStorage.getItem('adminToken'),
-      },
-    });
+    return this.httpClient.post<Books | any>(this.url + '/add-new-book', book);
   }
 
   //function to delete the book when the user clicks deleteBook button

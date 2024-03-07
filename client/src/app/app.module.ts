@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { HomeComponent } from './home/home.component';
@@ -21,6 +21,10 @@ import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
+
+//import app-http-interceptor
+import { appHttpInterceptor } from './Interceptors/app-http.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +41,7 @@ import { ReadingListComponent } from './reading-list/reading-list.component';
     FooterComponent,
     PageNotFoundComponent,
     LoadingSpinnerComponent,
-    ReadingListComponent
+    ReadingListComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,7 @@ import { ReadingListComponent } from './reading-list/reading-list.component';
     FormsModule,
     NgToastModule,
   ],
-  providers: [HttpClient],
+  providers: [provideHttpClient(withInterceptors([appHttpInterceptor]))],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

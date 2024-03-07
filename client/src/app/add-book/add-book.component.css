@@ -1,6 +1,12 @@
+/* to set container height */
+.container{
+  min-height: 85vh;
+}
 /* to set width of the card */
 .card {
-  width: 50%;
+  width: 80vw;
+  min-height: 90vh;
+  height: fit-content;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;

@@ -21,11 +21,18 @@
             <p class="card-text" id="pageCount">
               Page Count: {{ book.pageCount }}
             </p>
+            <p
+              class="card-text"
+              id="price"
+              *ngIf="this.loginService.userAdmin() === 'admin'"
+            >
+              Price: {{ book.price }}
+            </p>
             <p class="card-text" id="quantity">Quantity: {{ book.quantity }}</p>
             <p class="card-text" id="authors">Authors: {{ book.author }}</p>
             <div class="readingList">
               <button
-                *ngIf="loginStatus() === 'user'"
+                *ngIf="this.loginService.userAdmin() === 'user'"
                 type="button"
                 id="readingList"
                 class="btn"
@@ -34,7 +41,10 @@
                 Add to ReadingList
               </button>
             </div>
-            <div class="button" *ngIf="loginStatus() === 'admin'">
+            <div
+              class="button"
+              *ngIf="this.loginService.userAdmin() === 'admin'"
+            >
               <button
                 type="button"
                 id="deleteBook"

@@ -18,18 +18,22 @@ const {
 //books CRUD
 
 //add New Book
-booksApp.post("/add-new-book",verifyToken,expressAsyncHandler(addNewBook));
+booksApp.post("/add-new-book", verifyToken, expressAsyncHandler(addNewBook));
 
 //get all books
 booksApp.get("/all-books", expressAsyncHandler(getBooks));
 
 //delete book
-booksApp.delete("/delete-book/:userId", expressAsyncHandler(deleteBook));
+booksApp.delete(
+  "/delete-book/:userId",
+  verifyToken,
+  expressAsyncHandler(deleteBook)
+);
 
 //update book
-booksApp.put("/update-book", expressAsyncHandler(updateBook));
+booksApp.put("/update-book", verifyToken, expressAsyncHandler(updateBook));
 
 //show book
-booksApp.get("/show-book/:userId", expressAsyncHandler(showBook));
+booksApp.get("/show-book/:userId", verifyToken, expressAsyncHandler(showBook));
 
 module.exports = booksApp;

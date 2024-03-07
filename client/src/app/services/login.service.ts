@@ -17,7 +17,9 @@ export class LoginService {
   // signal which store userAdmin Login value if logged in or not (by default Log In)
   userAdmin = signal('');
 
+  //signal to set user email or username
   userEmailSignal = signal('');
+
   //Loading-Spinner Variable
   isLoading = false;
 
@@ -144,6 +146,10 @@ export class LoginService {
   checkUserToken() {
     if (localStorage.getItem('userToken')) {
       this.userAdmin.set('user');
+    } else if (localStorage.getItem('adminToken')) {
+      this.userAdmin.set('admin');
+    } else {
+      this.userAdmin.set('');
     }
   }
 
