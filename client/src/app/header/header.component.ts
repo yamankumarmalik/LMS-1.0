@@ -17,26 +17,10 @@ export class HeaderComponent implements OnInit {
   //inject book Service
   bookService = inject(BooksService);
 
-  //variable to store login status (Log in or out)
-  loginStatus;
-
   //can also initialize services in constructor
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.loginStatus = this.loginService.userAdmin;
-  }
-
-  // to change login status using signal when we click on logOut
-  changeLoginStatus() {
-    if (this.loginService.userAdmin() === 'admin') {
-      localStorage.removeItem('adminToken');
-    } else {
-      localStorage.removeItem('userToken');
-    }
-    this.loginService.userAdmin.set('');
-    this.router.navigate['/login'];
-  }
+  ngOnInit(): void {}
 
   // variable to receive the text which user types in the search bar
   searchText = '';

@@ -93,7 +93,12 @@
           />
         </div>
         <div class="button">
-          <button id="addBook" class="btn" type="submit">
+          <button
+            id="addBook"
+            class="btn"
+            type="submit"
+            [disabled]="this.updateBookForm.invalid"
+          >
             Update Book Details
           </button>
         </div>

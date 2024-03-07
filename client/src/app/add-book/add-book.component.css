@@ -1,5 +1,5 @@
 /* to set container height */
-.container{
+.container {
   min-height: 85vh;
 }
 /* to set width of the card */
@@ -13,7 +13,7 @@
 }
 
 /* to set font and other properties of form-label */
-.form-label{
+.form-label {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: bold;
@@ -21,7 +21,7 @@
 }
 
 /* to set font properties of form-control */
-.form-control{
+.form-control {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #5e5e5e;
@@ -29,11 +29,11 @@
 }
 
 /* Add book button styling */
-.button{
+.button {
   text-align: center;
   margin-bottom: 10px;
 }
-.btn{
+.btn {
   background-color: #0d3563;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
@@ -44,31 +44,7 @@
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
-  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .container {
   display: flex;

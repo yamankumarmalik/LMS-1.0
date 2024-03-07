@@ -9,3 +9,12 @@ Content-Type: application/json
    "username": "yamankumarmalik007@gmail.com",
    "readingList": [1]
 }
+
+###
+get http://localhost:4000/user-api/verifyToken
+Content-Type: application/json
+
+{
+   "headers":{
+   "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlhbWFua3VtYXJtYWxpazAwN0BnbWFpbC5jb20iLCJpYXQiOjE3MDk4Mzg4OTYsImV4cCI6MTcwOTg4MjA5Nn0.Xi2ySPiwwfZtRh8v-6rTZMJQp-jgVcDzMgbAE1b45Xs"}
+}

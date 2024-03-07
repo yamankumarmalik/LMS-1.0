@@ -1,18 +1,17 @@
-.notFound{
-    min-height: 550px;
-    width: 100%
+.notFound {
+  min-height: 550px;
+  width: 100%;
 }
 
 /* div styling */
 div {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: 20px;
-    text-align: center;
-  }
-  
-  h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
-  }
-  
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}

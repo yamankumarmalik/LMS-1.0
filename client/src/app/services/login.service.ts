@@ -157,4 +157,16 @@ export class LoginService {
   route() {
     this.router.navigate(['/books']);
   }
+
+  // to change login status using signal when we click on logOut
+  changeLoginStatus() {
+    if (this.userAdmin() === 'admin') {
+      localStorage.removeItem('adminToken');
+      this.userAdmin.set('');
+    } else {
+      localStorage.removeItem('userToken');
+      this.userAdmin.set('');
+    }
+    this.router.navigate['/login'];
+  }
 }

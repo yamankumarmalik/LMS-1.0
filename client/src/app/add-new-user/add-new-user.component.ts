@@ -23,7 +23,7 @@ export class AddNewUserComponent implements OnInit {
   ngOnInit(): void {
     //function to set login status
     this.loginService.checkUserToken();
-    
+
     this.addNewUser = new FormGroup({
       username: new FormControl('', [
         Validators.required,

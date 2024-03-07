@@ -37,19 +37,16 @@ export class AddBookComponent implements OnInit {
       ]),
       title: new FormControl(null, [
         Validators.required,
-        Validators.minLength(13),
-        Validators.maxLength(13),
-        Validators.pattern('^(a-zA-Z )*$'),
+        Validators.minLength(5),
+        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
       ]),
       genre: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^(a-zA-Z )*$'),
-        Validators.minLength(1),
+        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
         Validators.maxLength(25),
       ]),
       pageCount: new FormControl(null, [
         Validators.required,
-        Validators.minLength(1),
         Validators.maxLength(4),
       ]),
       price: new FormControl(null, [
@@ -59,23 +56,20 @@ export class AddBookComponent implements OnInit {
       ]),
       quantity: new FormControl(null, [
         Validators.required,
-        Validators.minLength(1),
         Validators.maxLength(2),
       ]),
       author: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^(a-zA-Z )*$'),
-        Validators.minLength(1),
+        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
         Validators.maxLength(50),
       ]),
       image: new FormControl(null, [
         Validators.required,
-        Validators.minLength(1),
-        Validators.maxLength(50),
+        Validators.maxLength(150),
       ]),
       altText: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^(a-zA-Z )*$'),
+        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
         Validators.minLength(5),
         Validators.maxLength(50),
       ]),

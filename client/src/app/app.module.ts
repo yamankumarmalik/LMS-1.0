@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { HomeComponent } from './home/home.component';
@@ -24,7 +24,6 @@ import { ReadingListComponent } from './reading-list/reading-list.component';
 
 //import app-http-interceptor
 import { appHttpInterceptor } from './Interceptors/app-http.interceptor';
-
 
 @NgModule({
   declarations: [
@@ -51,7 +50,13 @@ import { appHttpInterceptor } from './Interceptors/app-http.interceptor';
     FormsModule,
     NgToastModule,
   ],
-  providers: [provideHttpClient(withInterceptors([appHttpInterceptor]))],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: appHttpInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

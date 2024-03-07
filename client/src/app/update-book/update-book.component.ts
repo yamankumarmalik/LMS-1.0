@@ -28,19 +28,16 @@ export class UpdateBookComponent implements OnInit {
     ]),
     title: new FormControl(null, [
       Validators.required,
-      Validators.minLength(13),
-      Validators.maxLength(13),
-      Validators.pattern('^(a-zA-Z )*$'),
+      Validators.minLength(5),
+      Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
     ]),
     genre: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^(a-zA-Z )*$'),
-      Validators.minLength(1),
+      Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
       Validators.maxLength(25),
     ]),
     pageCount: new FormControl(null, [
       Validators.required,
-      Validators.minLength(1),
       Validators.maxLength(4),
     ]),
     price: new FormControl(null, [
@@ -50,23 +47,20 @@ export class UpdateBookComponent implements OnInit {
     ]),
     quantity: new FormControl(null, [
       Validators.required,
-      Validators.minLength(1),
       Validators.maxLength(2),
     ]),
     author: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^(a-zA-Z )*$'),
-      Validators.minLength(1),
+      Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
       Validators.maxLength(50),
     ]),
     image: new FormControl(null, [
       Validators.required,
-      Validators.minLength(1),
-      Validators.maxLength(50),
+      Validators.maxLength(150),
     ]),
     altText: new FormControl(null, [
       Validators.required,
-      Validators.pattern('^(a-zA-Z )*$'),
+      Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
       Validators.minLength(5),
       Validators.maxLength(50),
     ]),
@@ -89,7 +83,7 @@ export class UpdateBookComponent implements OnInit {
           (this.bookService.author = res.payload.author),
           (this.bookService.image = res.payload.image),
           (this.bookService.altText = res.payload.altText);
-        //to set the default values we can use patch value to overcome the problem of sending null to server
+        //to set the default values we can use patch value to overcome the problem of sending '' to server
         this.updateBookForm.patchValue({
           isbn: this.bookService.isbn,
           title: this.bookService.title,
@@ -110,7 +104,7 @@ export class UpdateBookComponent implements OnInit {
 
   //on Submit the user wants to update the book details in json server
   onSubmit() {
-    // make a copy of that object and change the values in that object and pass it in the function so as to solve the null problem using spread operator
+    // make a copy of that object and change the values in that object and pass it in the function so as to solve the '' problem using spread operator
     if (window.confirm('Are you sure you want to update this book entry?')) {
       this.bookService.updateBook(this.updateBookForm.value).subscribe({
         next: (res) => {
