@@ -3,81 +3,43 @@
   margin-bottom: 20px;
 }
 
-/* content */
-.content {
-  width: 50%;
-  margin-top: 5%;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  color: #5e5e5e;
-}
-
-.content h3 {
-  font-size: 24px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #333333;
-  font-weight: bold;
-}
-
-.content h4 {
-  font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #5e5e5e;
-  font-weight: bold;
-}
-
-.content button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  color: #ffffff;
-  background-color: #0066cc;
-  border-radius: 20px;
-}
-
 /* Form content */
 .loginForm {
-  margin-top: 3%;
-  margin-left: 15%;
-  width: 30%;
+  margin-top: 5%;
+  width: 50%;
   height: 90%;
   text-align: center;
+  margin: auto;
 }
 
 .card {
-  padding: 10px;
   border-radius: 5%;
-  margin-top: 15px;
+  margin-top: 15%;
   text-align: end;
+  background-color: #e6e6e6;
 }
 
 .card h3 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 36px;
   text-align: center;
-  color: #333333;
+  color: #000000;
 }
 
 /*username input field*/
 #username {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  color: #5e5e5e;
+  font-size: 18px;
+  color: #000000;
   background-color: #f5f5f7;
 }
 
 /* Password input field */
 #password {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   color: #5e5e5e;
   background-color: #f5f5f7;
-}
-
-/* Link for forgot Password */
-#forgotPassword {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
-  color: #00aeef;
 }
 
 #submit {
@@ -112,28 +74,10 @@
   margin-top: 40px;
 }
 
-.loginForm {
-  width: 50%;
-}
-
 /* css for mobile screens */
 @media only screen and (max-width: 600px) {
-  .d-flex {
-    flex-direction: column;
-    align-items: center;
-    height: 1000px;
-  }
-
-  /* increase height of container */
-  .container {
-    height: 70rem !important;
-    background-color: #f5f5f7;
-  }
-
   .loginForm {
-    margin: 0;
-    padding: 0;
+    margin: auto;
     width: auto;
-    padding-top: 30px;
   }
 }

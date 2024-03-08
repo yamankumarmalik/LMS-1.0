@@ -29,18 +29,8 @@ export class BooksService {
     return this.httpClient.delete<any>(deleteUrl);
   }
 
-  // taking signals and variables to show data in updateBook component
+  // taking signals to store Book id when click on updateBook button in books component
   bookId = signal('');
-  id: string;
-  isbn: string;
-  title: string;
-  genre: string;
-  pageCount: string;
-  price: string;
-  quantity: string;
-  author: string;
-  image: string;
-  altText: string;
 
   // function so that the user can update Book details and initialize values that are seen by default at the edit component
   showBook(id: string) {

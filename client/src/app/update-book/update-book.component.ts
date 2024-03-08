@@ -74,6 +74,18 @@ export class UpdateBookComponent implements OnInit {
     ]),
   });
 
+  // taking signals and variables to show data in updateBook component
+  id: string;
+  isbn: string;
+  title: string;
+  genre: string;
+  pageCount: string;
+  price: string;
+  quantity: string;
+  author: string;
+  image: string;
+  altText: string;
+
   ngOnInit(): void {
     //function to set login status
     this.loginService.checkUserToken();
@@ -81,27 +93,27 @@ export class UpdateBookComponent implements OnInit {
     //calling the function showBook to set the default values in the form for user to edit
     this.bookService.showBook(this.bookService.bookId()).subscribe({
       next: (res) => {
-        (this.bookService.id = res.payload.id),
-          (this.bookService.isbn = res.payload.isbn),
-          (this.bookService.title = res.payload.title),
-          (this.bookService.genre = res.payload.genre),
-          (this.bookService.pageCount = res.payload.pageCount),
-          (this.bookService.price = res.payload.price),
-          (this.bookService.quantity = res.payload.quantity),
-          (this.bookService.author = res.payload.author),
-          (this.bookService.image = res.payload.image),
-          (this.bookService.altText = res.payload.altText);
+        (this.id = res.payload.id),
+          (this.isbn = res.payload.isbn),
+          (this.title = res.payload.title),
+          (this.genre = res.payload.genre),
+          (this.pageCount = res.payload.pageCount),
+          (this.price = res.payload.price),
+          (this.quantity = res.payload.quantity),
+          (this.author = res.payload.author),
+          (this.image = res.payload.image),
+          (this.altText = res.payload.altText);
         //to set the default values we can use patch value to overcome the problem of sending '' to server
         this.updateBookForm.patchValue({
-          isbn: this.bookService.isbn,
-          title: this.bookService.title,
-          genre: this.bookService.genre,
-          pageCount: this.bookService.pageCount,
-          price: this.bookService.price,
-          quantity: this.bookService.quantity,
-          author: this.bookService.author,
-          image: this.bookService.image,
-          altText: this.bookService.altText,
+          isbn: this.isbn,
+          title: this.title,
+          genre: this.genre,
+          pageCount: this.pageCount,
+          price: this.price,
+          quantity: this.quantity,
+          author: this.author,
+          image: this.image,
+          altText: this.altText,
         });
       },
       error: (err) => {

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 //import forms
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 //Books Service
@@ -7,13 +7,14 @@ import { BooksService } from '../services/books.service';
 import { NgToastService } from 'ng-angular-popup';
 //loginService
 import { LoginService } from '../services/login.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css',
 })
-export class AddBookComponent implements OnInit {
+export class AddBookComponent implements OnInit, OnDestroy {
   //inject Book Service
   bookService = inject(BooksService);
   //inject Popup Service
@@ -78,7 +79,7 @@ export class AddBookComponent implements OnInit {
 
   //button to submit the form when clicked
   onSubmit() {
-    this.bookService.addBook(this.addBookForm.value).subscribe({
+    this.addBook$ = this.bookService.addBook(this.addBookForm.value).subscribe({
       next: (res) => {
         //to alert the user that the book has been added successfully we are using toast
         if (res.message === 'Book already in the database!') {
@@ -99,5 +100,15 @@ export class AddBookComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  //addBook observable
+  addBook$: Subscription;
+  //when component is destroyed
+  ngOnDestroy(): void {
+    //unsubscribe addBook
+    if (this.addBook$) {
+      this.addBook$.unsubscribe;
+    }
   }
 }

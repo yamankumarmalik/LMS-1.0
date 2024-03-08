@@ -9,10 +9,9 @@ import { HttpClient } from '@angular/common/http';
 import { Books } from '../models/books';
 // import router
 import { Router } from '@angular/router';
-// import pipe search
-import { SearchPipe } from '../search.pipe';
 //import ng-popup
 import { NgToastService } from 'ng-angular-popup';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -48,7 +47,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     //set headerSearch signal value when component is loaded
     this.bookService.headerSearch.set('browse');
 
-    this.httpClient.get<any>(this.baseUrl).subscribe({
+    this.getBooks$ = this.httpClient.get<any>(this.baseUrl).subscribe({
       next: (books) => {
         if (books.message === 'books') {
           for (let book of books.payload) {
@@ -69,7 +68,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     if (this.loginService.userAdmin() === 'user') {
       //to get user object
       const userURL = `http://localhost:4000/libUser-api/getUser/${this.loginService.userEmailSignal()}`;
-      this.httpClient.get<any>(userURL).subscribe({
+      this.getReadingList$ = this.httpClient.get<any>(userURL).subscribe({
         next: (res) => {
           this.username = res.payload.username;
           this.readingList = res.payload.readingList;
@@ -83,31 +82,29 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   //function to be called when user click deleteBook button
   deleteBook(id: string) {
-    if (window.confirm('Are you sure you want to delete this book entry?')) {
-      this.bookService.deleteBook(id).subscribe({
-        next: (res) => {
-          if (res.message === 'Book Deleted') {
-            this.toast.success({
-              detail: 'Book Deleted',
-              summary:
-                'Book with tile' + res.payload.title + 'deleted successfully.',
-              position: 'topCenter',
-              duration: 1000, //duration in ms
-            });
-            //to delete the book from local array created
-            let index;
-            for (let i = 0; i < this.book.length; i++) {
-              if (this.book[i].id === id) {
-                index = i;
-                break;
-              }
+    this.deleteBook$ = this.bookService.deleteBook(id).subscribe({
+      next: (res) => {
+        if (res.message === 'Book Deleted') {
+          this.toast.success({
+            detail: 'Book Deleted',
+            summary:
+              'Book with tile' + res.payload.title + 'deleted successfully.',
+            position: 'topCenter',
+            duration: 1000, //duration in ms
+          });
+          //to delete the book from local array created
+          let index;
+          for (let i = 0; i < this.book.length; i++) {
+            if (this.book[i].id === id) {
+              index = i;
+              break;
             }
-            this.book.splice(index, 1);
           }
-        },
-        error: (err) => console.log(err),
-      });
-    }
+          this.book.splice(index, 1);
+        }
+      },
+      error: (err) => console.log(err),
+    });
   }
 
   // when the user click on update book we route him to the updateBook component
@@ -131,22 +128,24 @@ export class BooksComponent implements OnInit, OnDestroy {
         username: this.username,
         readingList: this.readingList,
       };
-      this.httpClient.put<any>(url, updatedUser).subscribe({
-        next: (res) => {
-          this.toast.success({
-            detail: 'Book Added successfully',
-            summary: 'Your book was added to your Reading List!',
-            position: 'topCenter',
-            duration: 2000,
-          });
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+      return (this.updateReadingList$ = this.httpClient
+        .put<any>(url, updatedUser)
+        .subscribe({
+          next: (res) => {
+            this.toast.success({
+              detail: 'Book Added successfully',
+              summary: 'Your book was added to your Reading List!',
+              position: 'topCenter',
+              duration: 2000,
+            });
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        }));
     } else {
       if (findBook !== undefined) {
-        this.toast.error({
+        return this.toast.error({
           detail: 'Book already present in reading list!',
           summary: 'Please add another book',
           position: 'topCenter',
@@ -158,25 +157,56 @@ export class BooksComponent implements OnInit, OnDestroy {
           username: this.username,
           readingList: this.readingList,
         };
-        this.httpClient.put<any>(url, updatedUser).subscribe({
-          next: (res) => {
-            this.toast.success({
-              detail: 'Book Added successfully',
-              summary: 'Added to Reading LIst',
-              position: 'topCenter',
-              duration: 2000,
-            });
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
+        return (this.updateReadingList$ = this.httpClient
+          .put<any>(url, updatedUser)
+          .subscribe({
+            next: (res) => {
+              this.toast.success({
+                detail: 'Book Added successfully',
+                summary: 'Added to Reading LIst',
+                position: 'topCenter',
+                duration: 2000,
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          }));
       }
     }
   }
 
+  //getBooks subscribe to initialize books array
+  getBooks$: Subscription;
+
+  //getReading list to initialize readingList so that user can push into readingList
+  getReadingList$: Subscription;
+
+  //delete book from database
+  deleteBook$: Subscription;
+
+  //add book to reading list
+  updateReadingList$: Subscription;
+
   //when component is destroyed
   ngOnDestroy(): void {
     this.bookService.headerSearch.set('');
+
+    //unsubscribe all subscriptions
+    if (this.getBooks$) {
+      this.getBooks$.unsubscribe;
+    }
+
+    if (this.getReadingList$) {
+      this.getReadingList$.unsubscribe;
+    }
+
+    if (this.deleteBook$) {
+      this.deleteBook$.unsubscribe;
+    }
+
+    if (this.updateReadingList$) {
+      this.updateReadingList$.unsubscribe;
+    }
   }
 }

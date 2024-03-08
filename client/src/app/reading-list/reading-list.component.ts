@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 //import ng-popup
 import { NgToastService } from 'ng-angular-popup';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reading-list',
@@ -51,7 +52,7 @@ export class ReadingListComponent implements OnInit, OnDestroy {
     //set headerSearch to 'readingList'
     this.bookService.headerSearch.set('readingList');
     //all books to show when the user is logged in
-    this.httpClient.get<any>(this.baseUrl).subscribe({
+    this.getBooks$ = this.httpClient.get<any>(this.baseUrl).subscribe({
       next: (books) => {
         if (books.message === 'books') {
           for (let book of books.payload) {
@@ -69,7 +70,7 @@ export class ReadingListComponent implements OnInit, OnDestroy {
       error: (err) => console.log(err),
     });
     //readingList to show when the user is logged in
-    this.httpClient.get<any>(this.readingUrl).subscribe({
+    this.getReadingList$ = this.httpClient.get<any>(this.readingUrl).subscribe({
       next: (books) => {
         if (books.message === 'User Found') {
           for (let book of books.payload.readingList) {
@@ -136,19 +137,44 @@ export class ReadingListComponent implements OnInit, OnDestroy {
     };
 
     //request to update book array
-    this.httpClient.put<any>(url, updatedUser).subscribe({
-      next: (res) => {
-        this.toast.success({
-          detail: 'Book Removed successfully',
-          summary: 'Your book was successfully removed from the reading List!',
-          position: 'topCenter',
-          duration: 1000,
-        });
-      },
-      error: (err) => console.log(err),
-    });
+    this.updateReadingList$ = this.httpClient
+      .put<any>(url, updatedUser)
+      .subscribe({
+        next: (res) => {
+          this.toast.success({
+            detail: 'Book Removed successfully',
+            summary:
+              'Your book was successfully removed from the reading List!',
+            position: 'topCenter',
+            duration: 1000,
+          });
+        },
+        error: (err) => console.log(err),
+      });
   }
 
+  //get all books from database
+  getBooks$: Subscription;
+
+  //get user Reading List
+  getReadingList$: Subscription;
+
+  //update user Reading List
+  updateReadingList$: Subscription;
+
   //runs when component is destroyed
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    //unsubscribe all subscriptions on destroy
+    if (this.getBooks$) {
+      this.getBooks$.unsubscribe;
+    }
+
+    if (this.getReadingList$) {
+      this.getReadingList$.unsubscribe;
+    }
+
+    if (this.updateReadingList$) {
+      this.updateReadingList$.unsubscribe;
+    }
+  }
 }

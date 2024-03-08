@@ -9,18 +9,17 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpClient } from '@angular/common/http';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { HomeComponent } from './home/home.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
-import { SearchPipe } from './search.pipe';
 import { BooksComponent } from './books/books.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
+import { SearchPipe } from './pipes/search-pipe/search.pipe';
 
 //import app-http-interceptor
 import { appHttpInterceptor } from './Interceptors/app-http.interceptor';
@@ -35,12 +34,12 @@ import { appHttpInterceptor } from './Interceptors/app-http.interceptor';
     AddBookComponent,
     UpdateBookComponent,
     AddNewUserComponent,
-    SearchPipe,
     BooksComponent,
     FooterComponent,
     PageNotFoundComponent,
     LoadingSpinnerComponent,
     ReadingListComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

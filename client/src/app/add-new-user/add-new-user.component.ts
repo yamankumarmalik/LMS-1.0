@@ -1,16 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 //import required form directives
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 //import loginService to add new users
 import { LoginService } from '../services/login.service';
 import { NgToastService } from 'ng-angular-popup';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-new-user',
   templateUrl: './add-new-user.component.html',
   styleUrl: './add-new-user.component.css',
 })
-export class AddNewUserComponent implements OnInit {
+export class AddNewUserComponent implements OnInit, OnDestroy {
   //inject loginService
   loginService = inject(LoginService);
   //inject toast Service
@@ -42,26 +43,38 @@ export class AddNewUserComponent implements OnInit {
 
   //function to be called when the user clicks submit button
   onSubmit() {
-    this.loginService.addNewUser(this.addNewUser.value).subscribe({
-      next: (res) => {
-        if (res.message === 'User already existed') {
-          return this.toast.error({
-            detail: 'User with username already exists in the database!',
-            summary: 'Please choose another username!',
-            sticky: true,
-            position: 'topCenter',
-          });
-        } else {
-          this.toast.success({
-            detail: 'New User was successfully inserted in database!',
-            summary: 'Username: ' + res.payload.username,
-            position: 'topCenter',
-            duration: 1000,
-          });
-          this.addNewUser.reset();
-        }
-      },
-      error: (err) => console.log(err),
-    });
+    this.addNewUser$ = this.loginService
+      .addNewUser(this.addNewUser.value)
+      .subscribe({
+        next: (res) => {
+          if (res.message === 'User already existed') {
+            return this.toast.error({
+              detail: 'User with username already exists in the database!',
+              summary: 'Please choose another username!',
+              sticky: true,
+              position: 'topCenter',
+            });
+          } else {
+            this.toast.success({
+              detail: 'New User was successfully inserted in database!',
+              summary: 'Username: ' + res.payload.username,
+              position: 'topCenter',
+              duration: 1000,
+            });
+            this.addNewUser.reset();
+          }
+        },
+        error: (err) => console.log(err),
+      });
+  }
+
+  //add new user subscribe
+  addNewUser$: Subscription;
+  //when component is destroyed
+  ngOnDestroy(): void {
+    //unsubscribe the subscriptions
+    if (this.addNewUser$) {
+      this.addNewUser$.unsubscribe;
+    }
   }
 }

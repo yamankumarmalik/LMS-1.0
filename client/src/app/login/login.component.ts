@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -7,14 +7,25 @@ import {
 } from '@angular/forms';
 //login service
 import { LoginService } from '../services/login.service';
+//ng-popup import
+import { NgToastService } from 'ng-angular-popup';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  //inject login service
   loginService = inject(LoginService);
+
+  //toast inject
+  toast = inject(NgToastService);
+
+  //inject Router
+  router = inject(Router);
 
   //declaring the form group
   loginForm: FormGroup;
@@ -45,15 +56,124 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.isLogin === true) {
       //send loginForm object as argument
-      this.loginService.checkUser(this.loginForm.value);
+      this.userLogin$ = this.loginService
+        .checkUser(this.loginForm.value)
+        .subscribe({
+          next: (res) => {
+            this.loginService.isLoading = true;
+            if (res.message === 'Invalid username') {
+              this.loginService.isLoading = false;
+              return this.toast.error({
+                detail: 'Please Enter a valid Username',
+                summary: 'Username is invalid',
+                position: 'topCenter',
+                duration: 2000,
+              });
+            }
+            if (res.message === 'Invalid password') {
+              this.loginService.isLoading = false;
+              return this.toast.error({
+                detail: 'Please Enter the correct Password',
+                summary: 'Password is incorrect!',
+                position: 'topCenter',
+                duration: 2000,
+              });
+            }
+            if (res.message === 'login success') {
+              //store token in local/session storage
+              localStorage.setItem('userToken', res.token);
+              //set user status & current user to service
+              this.loginService.userAdmin.set('user');
+              //pop up message for success
+              this.toast.success({
+                detail: 'Login Success',
+                summary: 'User Login is successful!',
+                position: 'topCenter',
+                duration: 1500,
+              });
+              //navigate to books
+              this.loginService.userEmailSignal.set(res.payload.username);
+
+              this.router.navigate(['/books']);
+              this.loginService.isLoading = false;
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            this.loginService.isLoading = false;
+          },
+        });
     } else {
       //send loginForm object as argument to user check
-      this.loginService.checkAdmin(this.loginForm.value);
+      this.adminLogin$ = this.loginService
+        .checkAdmin(this.loginForm.value)
+        .subscribe({
+          next: (res) => {
+            this.loginService.isLoading = true;
+            if (res.message === 'Invalid username') {
+              this.loginService.isLoading = false;
+              return this.toast.error({
+                detail: 'Please Enter a valid Username',
+                summary: 'Username is invalid',
+                position: 'topCenter',
+                duration: 2000,
+              });
+            }
+            if (res.message === 'Invalid password') {
+              this.loginService.isLoading = false;
+              return this.toast.error({
+                detail: 'Please Enter the correct Password',
+                summary: 'Password is incorrect!',
+                position: 'topCenter',
+                duration: 2000,
+              });
+            }
+            if (res.message === 'login success') {
+              //store token in local/session storage
+              localStorage.setItem('adminToken', res.token);
+              //set user status & current user to service
+              this.loginService.userAdmin.set('admin');
+              //pop up message for success
+              this.toast.success({
+                detail: 'Login Success',
+                summary: 'Admin Login is successful!',
+                position: 'topCenter',
+                duration: 1500,
+              });
+              //set username
+              this.loginService.userEmailSignal.set(res.payload.username);
+
+              //navigate to books
+              this.router.navigate(['/books']);
+              this.loginService.isLoading = false;
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            this.loginService.isLoading = false;
+          },
+        });
     }
   }
 
   //change User function
   changeUser() {
     this.isLogin = !this.isLogin;
+  }
+
+  //subscribe observable for adminLogin
+  adminLogin$: Subscription;
+  //subscribe observable for userLogin
+  userLogin$: Subscription;
+  //on destroy unsubscribe
+  ngOnDestroy(): void {
+    if (this.adminLogin$) {
+      console.log(this.adminLogin$);
+      this.adminLogin$.unsubscribe;
+    }
+
+    if (this.userLogin$) {
+      this.userLogin$.unsubscribe;
+    }
   }
 }
