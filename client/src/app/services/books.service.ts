@@ -50,7 +50,7 @@ export class BooksService {
 
   //function to update the bookDetails in the jsonServer
   updateBook(user: any) {
-    let url = `http://localhost:4000/books-api/update-book`;
-    return this.httpClient.put<Books>(url, user);
+    let url = 'http://localhost:4000/books-api/update-book';
+    return this.httpClient.put<any>(url, user);
   }
 }

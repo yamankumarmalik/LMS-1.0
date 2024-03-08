@@ -18,3 +18,12 @@ Content-Type: application/json
    "headers":{
    "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlhbWFua3VtYXJtYWxpazAwN0BnbWFpbC5jb20iLCJpYXQiOjE3MDk4Mzg4OTYsImV4cCI6MTcwOTg4MjA5Nn0.Xi2ySPiwwfZtRh8v-6rTZMJQp-jgVcDzMgbAE1b45Xs"}
 }
+
+###
+put http://localhost:4000/books-api/update-book
+Content-Type: application/json
+
+{
+   "isbn":
+"9781786330895"
+}

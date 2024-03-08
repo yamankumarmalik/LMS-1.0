@@ -47,7 +47,7 @@ const loginUser = async (req, res) => {
   );
   res
     .status(200)
-    .send({ message: "login success", token: signedToken, user: user });
+    .send({ message: "login success", token: signedToken, payload: user });
 };
 
 //to check token from user for auth guard

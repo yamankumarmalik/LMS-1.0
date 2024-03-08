@@ -64,8 +64,8 @@ export class LoginService {
             duration: 1500,
           });
           //navigate to books
-          // this.userEmailSignal.set(res.payload.username);
-          console.log(res.payload);
+          this.userEmailSignal.set(res.payload.username);
+          console.log(res.payload.username);
           this.router.navigate(['/books']);
           this.isLoading = false;
         }

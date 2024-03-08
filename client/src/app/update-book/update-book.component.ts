@@ -6,6 +6,8 @@ import { BooksService } from '../services/books.service';
 import { Router } from '@angular/router';
 //loginService import
 import { LoginService } from '../services/login.service';
+//import ng-popup
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-update-book',
@@ -15,10 +17,16 @@ import { LoginService } from '../services/login.service';
 export class UpdateBookComponent implements OnInit {
   //inject loginService
   loginService = inject(LoginService);
+
   //inject booksService
   bookService = inject(BooksService);
+
   // inject router
   router = inject(Router);
+
+  //inject toast
+  toast = inject(NgToastService);
+
   //form group name for updating books details
   updateBookForm = new FormGroup({
     isbn: new FormControl(null, [
@@ -104,15 +112,18 @@ export class UpdateBookComponent implements OnInit {
 
   //on Submit the user wants to update the book details in json server
   onSubmit() {
-    // make a copy of that object and change the values in that object and pass it in the function so as to solve the '' problem using spread operator
-    if (window.confirm('Are you sure you want to update this book entry?')) {
-      this.bookService.updateBook(this.updateBookForm.value).subscribe({
-        next: (res) => {
-          alert('Your book entry has been updated successfully');
-          this.router.navigate(['/books']);
-        },
-        error: (err) => console.log(err),
-      });
-    }
+    //to update book in database
+    this.bookService.updateBook(this.updateBookForm.value).subscribe({
+      next: (res) => {
+        this.toast.success({
+          detail: 'Book data updated!',
+          summary: res.payload.title,
+          position: 'topCenter',
+          duration: 1000,
+        });
+        this.router.navigate(['/books']);
+      },
+      error: (err) => console.log(err),
+    });
   }
 }
