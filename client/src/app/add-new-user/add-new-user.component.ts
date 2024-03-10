@@ -68,7 +68,7 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
               detail: 'New User was successfully inserted in database!',
               summary: 'Username: ' + res.payload.username,
               position: 'topCenter',
-              duration: 1000,
+              duration: 2000,
             });
             this.addNewUser.reset();
           }

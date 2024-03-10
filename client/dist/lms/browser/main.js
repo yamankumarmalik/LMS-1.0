@@ -45160,7 +45160,7 @@ var _AddNewUserComponent = class _AddNewUserComponent {
             detail: "New User was successfully inserted in database!",
             summary: "Username: " + res.payload.username,
             position: "topCenter",
-            duration: 1e3
+            duration: 2e3
           });
           this.addNewUser.reset();
         }
