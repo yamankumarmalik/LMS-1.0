@@ -74,6 +74,12 @@
   margin-top: 40px;
 }
 
+.text-danger {
+  margin-top: 1%;
+  margin-left: 2%;
+  text-align: left;
+}
+
 /* css for mobile screens */
 @media only screen and (max-width: 600px) {
   .loginForm {

@@ -18,37 +18,48 @@
           <li>Don't re-use any of your last 10 passwords.</li>
           <li>Don't share your password with others.</li>
         </ul>
-        <button
-          type="button"
-          class="btn"
-          id="learnMore"
-          routerLink="/learnMore"
-        >
+        <button type="button" class="btn" id="learnMore" [disabled]="true">
           LEARN MORE
         </button>
       </div>
       <div class="loginForm">
         <div class="card">
-          <h3>Enter Credential for New Admin</h3>
+          <h3>Enter Credential for New User</h3>
           <div class="card-body">
             <form [formGroup]="addNewUser" (ngSubmit)="onSubmit()">
-              <div class="mb-5">
+              <div class="mb-4">
                 <input
-                  type="text"
+                  type="email"
                   id="username"
                   class="form-control"
-                  placeholder="User Name"
+                  placeholder="Email"
                   formControlName="username"
                 />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    username.invalid && (username.dirty || username.touched)
+                  "
+                >
+                  Username must be valid email!
+                </div>
               </div>
-              <div class="mb-5">
+              <div class="mb-4">
                 <input
-                  type="text"
+                  type="password"
                   id="password"
                   class="form-control"
                   placeholder="Password"
                   formControlName="password"
                 />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    password.invalid && (password.dirty || password.touched)
+                  "
+                >
+                  Password must contain 8 characters.
+                </div>
               </div>
               <div class="submitButton">
                 <button

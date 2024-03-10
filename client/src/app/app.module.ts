@@ -9,7 +9,6 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { HomeComponent } from './home/home.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
@@ -29,7 +28,6 @@ import { appHttpInterceptor } from './Interceptors/app-http.interceptor';
     AppComponent,
     HeaderComponent,
     LoginComponent,
-    LearnMoreComponent,
     HomeComponent,
     AddBookComponent,
     UpdateBookComponent,

@@ -5,11 +5,19 @@
         <div class="mb-3">
           <label for="isbn" class="form-label">Isbn-13*</label>
           <input
-            type="number"
+            type="string"
             id="isbn"
             class="form-control"
             formControlName="isbn"
           />
+          <div class="text-danger">
+            <div
+              *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)"
+              class="text-danger"
+            >
+              Isbn must be a number of 13 digits!
+            </div>
+          </div>
         </div>
         <div class="mb-3">
           <label for="title" class="form-label">Title*</label>
@@ -19,6 +27,12 @@
             class="form-control"
             formControlName="title"
           />
+          <div
+            *ngIf="title.invalid && (title.dirty || title.touched)"
+            class="text-danger"
+          >
+            Title must be a string!
+          </div>
         </div>
         <div class="mb-3">
           <label for="genre" class="form-label">Genre*</label>
@@ -28,33 +42,57 @@
             class="form-control"
             formControlName="genre"
           />
+          <div
+            *ngIf="genre.invalid && (genre.dirty || genre.touched)"
+            class="text-danger"
+          >
+            Genre must be a string!
+          </div>
         </div>
         <div class="mb-3">
           <label for="pageCount" class="form-label">PageCount*</label>
           <input
-            type="number"
+            type="string"
             id="pageCount"
             class="form-control"
             formControlName="pageCount"
           />
+          <div
+            *ngIf="pageCount.invalid && (pageCount.dirty || pageCount.touched)"
+            class="text-danger"
+          >
+            Page Count must be a number between 1-9999 !
+          </div>
         </div>
         <div class="mb-3">
           <label for="price" class="form-label">Price*</label>
           <input
-            type="number"
+            type="string"
             id="price"
             class="form-control"
             formControlName="price"
           />
+          <div
+            *ngIf="price.invalid && (price.dirty || price.touched)"
+            class="text-danger"
+          >
+            Price must be number and between 1-9999 !
+          </div>
         </div>
         <div class="mb-3">
           <label for="quantity" class="form-label">Quantity*</label>
           <input
-            type="number"
+            type="string"
             id="quantity"
             class="form-control"
             formControlName="quantity"
           />
+          <div
+            *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)"
+            class="text-danger"
+          >
+            Quantity must be number and between 1-99 !
+          </div>
         </div>
         <div class="mb-3">
           <label for="author" class="form-label">Author*</label>
@@ -64,6 +102,12 @@
             class="form-control"
             formControlName="author"
           />
+          <div
+            *ngIf="author.invalid && (author.dirty || author.touched)"
+            class="text-danger"
+          >
+            Author must be a string!
+          </div>
         </div>
         <div class="mb-3">
           <label for="image" class="form-label">Image Link*</label>
@@ -73,6 +117,12 @@
             class="form-control"
             formControlName="image"
           />
+          <div
+            *ngIf="image.invalid && (image.dirty || image.touched)"
+            class="text-danger"
+          >
+            Image must be a link!
+          </div>
         </div>
         <div class="mb-3">
           <label for="altText" class="form-label">Alt Text*</label>
@@ -82,6 +132,12 @@
             class="form-control"
             formControlName="altText"
           />
+          <div
+            *ngIf="altText.invalid && (altText.dirty || altText.touched)"
+            class="text-danger"
+          >
+            Alt Text must be a string!
+          </div>
         </div>
         <div class="button">
           <button

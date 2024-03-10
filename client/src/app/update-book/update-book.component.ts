@@ -74,6 +74,43 @@ export class UpdateBookComponent implements OnInit {
     ]),
   });
 
+  //get form controls
+  get isbn1() {
+    return this.updateBookForm.get('isbn');
+  }
+
+  get title1() {
+    return this.updateBookForm.get('title');
+  }
+
+  get genre1() {
+    return this.updateBookForm.get('genre');
+  }
+
+  get pageCount1() {
+    return this.updateBookForm.get('pageCount');
+  }
+
+  get price1() {
+    return this.updateBookForm.get('price');
+  }
+
+  get quantity1() {
+    return this.updateBookForm.get('quantity');
+  }
+
+  get author1() {
+    return this.updateBookForm.get('author');
+  }
+
+  get image1() {
+    return this.updateBookForm.get('image');
+  }
+
+  get altText1() {
+    return this.updateBookForm.get('altText');
+  }
+
   // taking signals and variables to show data in updateBook component
   id: string;
   isbn: string;

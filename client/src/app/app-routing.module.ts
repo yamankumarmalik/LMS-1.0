@@ -5,7 +5,6 @@ import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { authGuard } from './auth/auth.guard';
 import { BooksComponent } from './books/books.component';
 import { HomeComponent } from './home/home.component';
-import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
@@ -20,10 +19,6 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-  },
-  {
-    path: 'learnMore',
-    component: LearnMoreComponent,
   },
   {
     path: 'books', //books are displayed in this component

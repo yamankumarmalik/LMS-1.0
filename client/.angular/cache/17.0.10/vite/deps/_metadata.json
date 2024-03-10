@@ -1,59 +1,59 @@
 {
-  "hash": "84481879",
-  "browserHash": "22ff6b2f",
+  "hash": "eedda18d",
+  "browserHash": "b75c23e7",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "20e77b91",
+      "fileHash": "6d71fc98",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "94aac219",
+      "fileHash": "83b9d94c",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "113f2087",
+      "fileHash": "5d25ed7a",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "39c77bf2",
+      "fileHash": "6e0c80d5",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "f8e2a391",
+      "fileHash": "52f2d5ad",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "439b8a07",
+      "fileHash": "a8dd56e2",
       "needsInterop": false
     },
     "bootstrap/dist/js/bootstrap.bundle": {
       "src": "../../../../../node_modules/bootstrap/dist/js/bootstrap.bundle.js",
       "file": "bootstrap_dist_js_bootstrap__bundle.js",
-      "fileHash": "0f5e5281",
+      "fileHash": "385062c6",
       "needsInterop": true
     },
     "ng-angular-popup": {
       "src": "../../../../../node_modules/ng-angular-popup/fesm2022/ng-angular-popup.mjs",
       "file": "ng-angular-popup.js",
-      "fileHash": "a874dc76",
+      "fileHash": "59c99e0e",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "4aca63d4",
+      "fileHash": "ded62d15",
       "needsInterop": false
     }
   },

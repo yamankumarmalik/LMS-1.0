@@ -8,7 +8,7 @@
         <h3>Sign In</h3>
         <div class="card-body">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <div class="mb-5">
+            <div class="mb-4">
               <input
                 type="email"
                 id="username"
@@ -16,8 +16,14 @@
                 placeholder="Email"
                 formControlName="username"
               />
+              <div
+                class="text-danger"
+                *ngIf="username.invalid && (username.dirty || username.touched)"
+              >
+                Username must be valid email!
+              </div>
             </div>
-            <div class="mb-5">
+            <div class="mb-4">
               <input
                 type="password"
                 id="password"
@@ -25,6 +31,12 @@
                 placeholder="Password"
                 formControlName="password"
               />
+              <div
+                class="text-danger"
+                *ngIf="password.invalid && (password.dirty || password.touched)"
+              >
+                Password must contain 8 characters.
+              </div>
             </div>
             <div class="submitButton">
               <button

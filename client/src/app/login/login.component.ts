@@ -43,12 +43,21 @@ export class LoginComponent implements OnInit, OnDestroy {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(8),
         Validators.pattern(
-          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{5,}'
+          '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
         ),
       ]),
     });
+  }
+
+  //get the form controls
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   isLogin: boolean = true;
@@ -168,7 +177,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   //on destroy unsubscribe
   ngOnDestroy(): void {
     if (this.adminLogin$) {
-      console.log(this.adminLogin$);
       this.adminLogin$.unsubscribe;
     }
 

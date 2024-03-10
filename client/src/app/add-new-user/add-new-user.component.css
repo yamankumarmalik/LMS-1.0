@@ -57,6 +57,12 @@
   color: #333333;
 }
 
+.text-danger {
+  margin-top: 1%;
+  margin-left: 2%;
+  text-align: left;
+}
+
 /*username input field*/
 #username {
   font-family: Arial, Helvetica, sans-serif;

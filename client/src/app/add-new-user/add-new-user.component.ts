@@ -41,6 +41,15 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
     });
   }
 
+  //getters for the form controls
+  get username() {
+    return this.addNewUser.get('username');
+  }
+
+  get password() {
+    return this.addNewUser.get('password');
+  }
+
   //function to be called when the user clicks submit button
   onSubmit() {
     this.addNewUser$ = this.loginService
