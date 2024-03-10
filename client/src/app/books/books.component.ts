@@ -208,5 +208,8 @@ export class BooksComponent implements OnInit, OnDestroy {
     if (this.updateReadingList$) {
       this.updateReadingList$.unsubscribe;
     }
+
+    //reset search text
+    this.loginService.searchStatus.set('');
   }
 }

@@ -30,6 +30,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/books']);
     //setting the value of the signal when user clicks the search button
     this.loginService.searchStatus.set(this.searchText);
+    //reset search
+    this.searchText = '';
   }
 
   //when user clicks on login

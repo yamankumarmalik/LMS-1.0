@@ -45540,6 +45540,7 @@ var _BooksComponent = class _BooksComponent {
     if (this.updateReadingList$) {
       this.updateReadingList$.unsubscribe;
     }
+    this.loginService.searchStatus.set("");
   }
 };
 _BooksComponent.\u0275fac = function BooksComponent_Factory(t) {
@@ -46572,6 +46573,7 @@ var _HeaderComponent = class _HeaderComponent {
   onSearch() {
     this.router.navigate(["/books"]);
     this.loginService.searchStatus.set(this.searchText);
+    this.searchText = "";
   }
   //when user clicks on login
   goToLogin() {
