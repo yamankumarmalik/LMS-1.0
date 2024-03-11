@@ -90,7 +90,7 @@ export class BooksComponent implements OnInit, OnDestroy {
             summary:
               'Book with tile' + res.payload.title + 'deleted successfully.',
             position: 'topCenter',
-            duration: 1000, //duration in ms
+            duration: 2000, //duration in ms
           });
           //to delete the book from local array created
           let index;

@@ -1,6 +1,8 @@
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 //import forms
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+//import router
+import { Router } from '@angular/router';
 //Books Service
 import { BooksService } from '../services/books.service';
 //Popup Service
@@ -21,6 +23,8 @@ export class AddBookComponent implements OnInit, OnDestroy {
   toast = inject(NgToastService);
   //inject Login Service
   loginService = inject(LoginService);
+  //inject router
+  router = inject(Router);
 
   //declaring form group
   addBookForm: FormGroup;
@@ -39,11 +43,11 @@ export class AddBookComponent implements OnInit, OnDestroy {
       title: new FormControl(null, [
         Validators.required,
         Validators.minLength(5),
-        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
+        Validators.pattern('^(?!\\s)[a-zA-Z &!,]*(?<!\\s)$'),
       ]),
       genre: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
+        Validators.pattern('^(?!\\s)[a-zA-Z &!,]*(?<!\\s)$'),
         Validators.maxLength(25),
       ]),
       pageCount: new FormControl(null, [
@@ -61,7 +65,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
       ]),
       author: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
+        Validators.pattern('^(?!\\s)[a-zA-Z &!,]*(?<!\\s)$'),
         Validators.maxLength(50),
       ]),
       image: new FormControl(null, [
@@ -70,7 +74,7 @@ export class AddBookComponent implements OnInit, OnDestroy {
       ]),
       altText: new FormControl(null, [
         Validators.required,
-        Validators.pattern('^(?!\\s)[a-zA-Z ]*(?<!\\s)$'),
+        Validators.pattern('^(?!\\s)[a-zA-Z &!,]*(?<!\\s)$'),
         Validators.minLength(5),
         Validators.maxLength(50),
       ]),
@@ -133,6 +137,8 @@ export class AddBookComponent implements OnInit, OnDestroy {
             position: 'topCenter',
             duration: 5000,
           });
+          this.addBookForm.reset();
+          this.router.navigate(['/books']);
         }
       },
       error: (err) => console.log(err),
