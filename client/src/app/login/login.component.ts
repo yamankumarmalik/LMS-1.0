@@ -36,22 +36,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginService.checkUserToken();
 
     this.loginForm = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-      ]),
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
     });
-  }
-
-  //get the form controls
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
   }
 
   isLogin: boolean = true;
@@ -68,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               this.loginService.isLoading = false;
               return this.toast.error({
                 detail: 'Please Enter a valid Username',
-                summary: 'Username is invalid',
+                summary: 'Username must be a valid email !',
                 position: 'topCenter',
                 duration: 2000,
               });

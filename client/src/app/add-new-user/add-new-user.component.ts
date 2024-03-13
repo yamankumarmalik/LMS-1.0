@@ -28,8 +28,7 @@ export class AddNewUserComponent implements OnInit, OnDestroy {
     this.addNewUser = new FormGroup({
       username: new FormControl('', [
         Validators.required,
-        Validators.email,
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        Validators.email
       ]),
       password: new FormControl('', [
         Validators.required,

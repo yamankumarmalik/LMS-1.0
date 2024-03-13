@@ -45130,8 +45130,7 @@ var _AddNewUserComponent = class _AddNewUserComponent {
     this.addNewUser = new FormGroup({
       username: new FormControl("", [
         Validators.required,
-        Validators.email,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$")
+        Validators.email
       ]),
       password: new FormControl("", [
         Validators.required,
@@ -45672,62 +45671,42 @@ function LoginComponent_div_1_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
 }
-function LoginComponent_div_2_div_9_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275text(1, " Username is required ! ");
-    \u0275\u0275elementEnd();
-  }
-}
-function LoginComponent_div_2_div_12_Template(rf, ctx) {
-  if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 16);
-    \u0275\u0275text(1, " Password is required ! ");
-    \u0275\u0275elementEnd();
-  }
-}
 function LoginComponent_div_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r5 = \u0275\u0275getCurrentView();
+    const _r3 = \u0275\u0275getCurrentView();
     \u0275\u0275elementStart(0, "div", 4)(1, "div", 5)(2, "div", 6)(3, "h3");
     \u0275\u0275text(4, "Sign In");
     \u0275\u0275elementEnd();
     \u0275\u0275elementStart(5, "div", 7)(6, "form", 8);
     \u0275\u0275listener("ngSubmit", function LoginComponent_div_2_Template_form_ngSubmit_6_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r4 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r4.onSubmit());
+      \u0275\u0275restoreView(_r3);
+      const ctx_r2 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r2.onSubmit());
     });
     \u0275\u0275elementStart(7, "div", 9);
     \u0275\u0275element(8, "input", 10);
-    \u0275\u0275template(9, LoginComponent_div_2_div_9_Template, 2, 0, "div", 11);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(10, "div", 9);
-    \u0275\u0275element(11, "input", 12);
-    \u0275\u0275template(12, LoginComponent_div_2_div_12_Template, 2, 0, "div", 11);
+    \u0275\u0275elementStart(9, "div", 9);
+    \u0275\u0275element(10, "input", 11);
     \u0275\u0275elementEnd();
-    \u0275\u0275elementStart(13, "div", 13)(14, "button", 14);
-    \u0275\u0275text(15);
+    \u0275\u0275elementStart(11, "div", 12)(12, "button", 13);
+    \u0275\u0275text(13);
     \u0275\u0275elementEnd();
-    \u0275\u0275text(16, " | ");
-    \u0275\u0275elementStart(17, "button", 15);
-    \u0275\u0275listener("click", function LoginComponent_div_2_Template_button_click_17_listener() {
-      \u0275\u0275restoreView(_r5);
-      const ctx_r6 = \u0275\u0275nextContext();
-      return \u0275\u0275resetView(ctx_r6.changeUser());
+    \u0275\u0275text(14, " | ");
+    \u0275\u0275elementStart(15, "button", 14);
+    \u0275\u0275listener("click", function LoginComponent_div_2_Template_button_click_15_listener() {
+      \u0275\u0275restoreView(_r3);
+      const ctx_r4 = \u0275\u0275nextContext();
+      return \u0275\u0275resetView(ctx_r4.changeUser());
     });
-    \u0275\u0275text(18);
+    \u0275\u0275text(16);
     \u0275\u0275elementEnd()()()()()()();
   }
   if (rf & 2) {
     const ctx_r1 = \u0275\u0275nextContext();
     \u0275\u0275advance(6);
     \u0275\u0275property("formGroup", ctx_r1.loginForm);
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.username.invalid && (ctx_r1.username.dirty || ctx_r1.username.touched));
-    \u0275\u0275advance(3);
-    \u0275\u0275property("ngIf", ctx_r1.password.invalid && (ctx_r1.password.dirty || ctx_r1.password.touched));
-    \u0275\u0275advance(2);
+    \u0275\u0275advance(6);
     \u0275\u0275property("disabled", ctx_r1.loginForm.invalid);
     \u0275\u0275advance();
     \u0275\u0275textInterpolate1(" ", ctx_r1.isLogin ? "User Login" : "Admin Login", " ");
@@ -45746,20 +45725,9 @@ var _LoginComponent = class _LoginComponent {
   ngOnInit() {
     this.loginService.checkUserToken();
     this.loginForm = new FormGroup({
-      username: new FormControl("", [
-        Validators.required
-      ]),
-      password: new FormControl("", [
-        Validators.required
-      ])
+      username: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
     });
-  }
-  //get the form controls
-  get username() {
-    return this.loginForm.get("username");
-  }
-  get password() {
-    return this.loginForm.get("password");
   }
   //on submit check whether the user is correct or not if correct route to the admin component
   onSubmit() {
@@ -45771,7 +45739,7 @@ var _LoginComponent = class _LoginComponent {
             this.loginService.isLoading = false;
             return this.toast.error({
               detail: "Please Enter a valid Username",
-              summary: "Username is invalid",
+              summary: "Username must be a valid email !",
               position: "topCenter",
               duration: 2e3
             });
@@ -45864,10 +45832,10 @@ var _LoginComponent = class _LoginComponent {
 _LoginComponent.\u0275fac = function LoginComponent_Factory(t) {
   return new (t || _LoginComponent)();
 };
-_LoginComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 3, vars: 2, consts: [[1, "container"], ["style", "text-align: center", 4, "ngIf"], ["class", "row", 4, "ngIf"], [2, "text-align", "center"], [1, "row"], [1, "loginForm"], [1, "card"], [1, "card-body"], [3, "formGroup", "ngSubmit"], [1, "mb-4"], ["type", "email", "id", "username", "placeholder", "Email", "formControlName", "username", 1, "form-control"], ["class", "text-danger", 4, "ngIf"], ["type", "password", "id", "password", "placeholder", "Password", "formControlName", "password", 1, "form-control"], [1, "submitButton"], ["type", "submit", "id", "submit", 1, "btn", 3, "disabled"], ["type", "button", "id", "switch", 1, "btn", 3, "click"], [1, "text-danger"]], template: function LoginComponent_Template(rf, ctx) {
+_LoginComponent.\u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _LoginComponent, selectors: [["app-login"]], decls: 3, vars: 2, consts: [[1, "container"], ["style", "text-align: center", 4, "ngIf"], ["class", "row", 4, "ngIf"], [2, "text-align", "center"], [1, "row"], [1, "loginForm"], [1, "card"], [1, "card-body"], [3, "formGroup", "ngSubmit"], [1, "mb-4"], ["type", "email", "id", "username", "placeholder", "Email", "formControlName", "username", 1, "form-control"], ["type", "password", "id", "password", "placeholder", "Password", "formControlName", "password", 1, "form-control"], [1, "submitButton"], ["type", "submit", "id", "submit", 1, "btn", 3, "disabled"], ["type", "button", "id", "switch", 1, "btn", 3, "click"]], template: function LoginComponent_Template(rf, ctx) {
   if (rf & 1) {
     \u0275\u0275elementStart(0, "div", 0);
-    \u0275\u0275template(1, LoginComponent_div_1_Template, 2, 0, "div", 1)(2, LoginComponent_div_2_Template, 19, 6, "div", 2);
+    \u0275\u0275template(1, LoginComponent_div_1_Template, 2, 0, "div", 1)(2, LoginComponent_div_2_Template, 17, 4, "div", 2);
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {

@@ -16,12 +16,6 @@
                 placeholder="Email"
                 formControlName="username"
               />
-              <div
-                class="text-danger"
-                *ngIf="username.invalid && (username.dirty || username.touched)"
-              >
-                Username is required !
-              </div>
             </div>
             <div class="mb-4">
               <input
@@ -31,12 +25,6 @@
                 placeholder="Password"
                 formControlName="password"
               />
-              <div
-                class="text-danger"
-                *ngIf="password.invalid && (password.dirty || password.touched)"
-              >
-                Password is required !
-              </div>
             </div>
             <div class="submitButton">
               <button

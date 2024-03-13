@@ -6,16 +6,18 @@ function verifyToken(req, res, next) {
   var dateNow = new Date();
 
   //get bearer token from headers of req object
-  const bearerToken = req.get('authorization');
+  const bearerToken = req.get("authorization");
   //get token
   if (bearerToken) {
     //verify the token
     decodedToken = jwt.verify(bearerToken, process.env.SECRET_KEY);
     //if token is expired
+    //if token is expired
     if (decodedToken.exp < dateNow.getTime() / 1000) {
-      return res.status(200).send({ message: "Token expired" });
+      res.status(200).send({ message: "Token expired" });
+    } else {
+      next();
     }
-    next();
   } else {
     res.status(200).send({ message: "Token not found" });
   }

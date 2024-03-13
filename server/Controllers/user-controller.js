@@ -56,7 +56,7 @@ const verify = async (req, res) => {
   var dateNow = new Date();
 
   //get bearer token from headers of req object
-  const bearerToken = req.rawHeaders[11];
+  const bearerToken = req.get("authorization");
   //get token
   if (bearerToken) {
     //verify the token
